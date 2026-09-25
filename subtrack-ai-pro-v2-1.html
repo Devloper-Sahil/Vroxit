@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0f19">
+<meta name="color-scheme" content="dark light">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>SubTrack AI Pro</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300f2fe'/%3E%3Cstop offset='.55' stop-color='%234facfe'/%3E%3Cstop offset='1' stop-color='%23a18cd1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='9' fill='url(%23g)'/%3E%3Cpath d='M16 8l8 4.5-8 4.5-8-4.5zM8 17l8 4.5 8-4.5' stroke='%230b0f19' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2300f2fe'/%3E%3Cstop offset='.55' stop-color='%234facfe'/%3E%3Cstop offset='1' stop-color='%23a18cd1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' fill='url(%23g)'/%3E%3Cpath d='M16 8l8 4.5-8 4.5-8-4.5zM8 17l8 4.5 8-4.5' stroke='%230b0f19' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    window.tailwind = window.tailwind || {};
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: { ink: '#0b0f19', neon: { cyan: '#00f2fe', blue: '#4facfe', violet: '#a18cd1' } },
+                fontFamily: { display: ['Sora', 'ui-sans-serif', 'system-ui', 'sans-serif'], sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] },
+                keyframes: { floaty: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' } } },
+                animation: { floaty: 'floaty 6s ease-in-out infinite', 'floaty-slow': 'floaty 9s ease-in-out infinite' }
+            }
+        }
+    };
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<style>
+:root{--bg:#0b0f19;--text:#e8ecf5;--muted:#94a3b8;--muted2:#64708a;--panel-bg:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.025));--panel-border:rgba(255,255,255,.09);--panel-strong:rgba(14,19,33,.9);--input-bg:rgba(255,255,255,.05);--input-border:rgba(255,255,255,.1);--divider:rgba(255,255,255,.1);--skel-bg:rgba(255,255,255,.05);--bar-bg:rgba(11,15,25,.68);--radius-lg:2rem}
+[data-theme="light"]{--bg:#eef1f8;--text:#101527;--muted:#5b6478;--muted2:#7c869c;--panel-bg:linear-gradient(145deg,rgba(255,255,255,.8),rgba(255,255,255,.55));--panel-border:rgba(15,23,42,.09);--panel-strong:rgba(255,255,255,.96);--input-bg:rgba(15,23,42,.045);--input-border:rgba(15,23,42,.13);--divider:rgba(15,23,42,.09);--skel-bg:rgba(15,23,42,.07);--bar-bg:rgba(255,255,255,.72)}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--bg);-webkit-text-size-adjust:100%}
+body{margin:0;position:relative;isolation:isolate;min-height:100vh;overflow-x:hidden;color:var(--text);background:var(--bg);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;transition:background-color .35s ease,color .35s ease}
+* {scrollbar-width:none;-ms-overflow-style:none}
+*::-webkit-scrollbar{display:none}
+::selection{background:rgba(0,242,254,.3)}
+:focus-visible{outline:2px solid #00f2fe;outline-offset:3px}
+.is-hidden{display:none!important}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.text-neon{background:linear-gradient(90deg,#00f2fe,#4facfe 55%,#a18cd1);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.blob{position:fixed;border-radius:9999px;filter:blur(90px);pointer-events:none;z-index:0;will-change:transform}
+.blob-1{width:36rem;height:36rem;top:-12rem;left:-10rem;background:#4facfe;opacity:.24;animation:drift1 18s ease-in-out infinite}
+.blob-2{width:32rem;height:32rem;top:20%;right:-12rem;background:#a18cd1;opacity:.26;animation:drift2 23s ease-in-out infinite}
+.blob-3{width:30rem;height:30rem;bottom:-12rem;left:25%;background:#00f2fe;opacity:.14;animation:drift3 27s ease-in-out infinite}
+[data-theme="light"] .blob{opacity:.16!important}
+@keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(70px,90px) scale(1.15)}}
+@keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-80px,60px) scale(.9)}}
+@keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(60px,-70px) scale(1.2)}}
+
+.glass{position:relative;background:var(--panel-bg);-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);border:1px solid var(--panel-border);box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 24px 60px -30px rgba(0,0,0,.85);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease,border-color .35s ease,background-color .35s ease}
+.glass-hover::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,rgba(0,242,254,.7),rgba(161,140,209,.15) 50%,rgba(79,172,254,.7));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .35s ease;pointer-events:none}
+.glass-hover:hover{transform:translateY(-4px) scale(1.012);box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 30px 70px -28px rgba(79,172,254,.5),0 0 40px -12px rgba(0,242,254,.25)}
+.glass-hover:hover::before{opacity:1}
+.glass-strong{background:var(--panel-strong);-webkit-backdrop-filter:blur(28px) saturate(170%);backdrop-filter:blur(28px) saturate(170%);border:1px solid var(--panel-border);box-shadow:0 -10px 60px -20px rgba(0,242,254,.2),0 40px 100px -30px rgba(0,0,0,.75)}
+.glass-bar{background:var(--bar-bg);-webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);border-color:var(--divider)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.glass-bar,.glass-strong{background:var(--bg)}}
+
+.skel{position:relative;overflow:hidden;background:var(--skel-bg);border-radius:.75rem}
+.skel::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);animation:shimmer 1.4s infinite}
+@keyframes shimmer{100%{transform:translateX(100%)}}
+
+.btn-neon{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-height:48px;padding:.8rem 1.5rem;border-radius:9999px;border:0;cursor:pointer;font-weight:700;color:#06101c;background:linear-gradient(135deg,#00f2fe,#4facfe 55%,#a18cd1);box-shadow:0 10px 30px -10px rgba(0,242,254,.6);transition:transform .25s ease,box-shadow .25s ease,filter .25s ease}
+.btn-neon:hover:not(:disabled){transform:translateY(-2px) scale(1.02);filter:brightness(1.08);box-shadow:0 16px 40px -10px rgba(79,172,254,.85)}
+.btn-neon:active:not(:disabled){transform:scale(.98)}
+.btn-neon:disabled{opacity:.6;cursor:not-allowed}
+.btn-ghost{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-height:48px;padding:.8rem 1.4rem;border-radius:9999px;cursor:pointer;font-weight:600;color:var(--text);background:var(--input-bg);border:1px solid var(--input-border);transition:background-color .25s ease,border-color .25s ease,transform .25s ease}
+.btn-ghost:hover:not(:disabled){background:rgba(0,242,254,.12);border-color:rgba(0,242,254,.4);transform:translateY(-1px)}
+.btn-ghost:disabled{opacity:.6;cursor:not-allowed}
+.btn-white{display:inline-flex;align-items:center;justify-content:center;gap:.7rem;width:100%;min-height:48px;padding:.8rem 1.4rem;border-radius:9999px;border:0;cursor:pointer;font-weight:600;color:#0b0f19;background:#fff;transition:transform .25s ease,background-color .25s ease}
+.btn-white:hover:not(:disabled){background:#eaf1ff;transform:translateY(-2px) scale(1.01)}
+.btn-white:disabled{opacity:.6;cursor:not-allowed}
+.pill{display:inline-flex;align-items:center;gap:.5rem;min-height:40px;padding:.5rem 1rem;border-radius:9999px;cursor:pointer;font-size:.85rem;font-weight:600;color:#7ff7ff;background:var(--input-bg);border:1px solid var(--input-border);transition:background-color .25s ease,border-color .25s ease}
+.pill:hover{background:rgba(0,242,254,.14);border-color:rgba(0,242,254,.4)}
+.ibtn{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:9999px;cursor:pointer;font-size:.85rem;color:var(--muted);background:var(--input-bg);border:1px solid var(--input-border);transition:transform .2s ease,color .2s ease,background-color .2s ease,border-color .2s ease}
+.ibtn:hover{transform:scale(1.12);color:#fff}
+.ibtn.edit:hover{background:rgba(79,172,254,.3);border-color:rgba(79,172,254,.6)}
+.ibtn.del:hover{background:rgba(244,63,94,.3);border-color:rgba(244,63,94,.6)}
+.ibtn.listening{color:#fda4af;border-color:rgba(244,63,94,.6);background:rgba(244,63,94,.15);animation:pulse 1.1s ease-in-out infinite}
+.ibtn.pause:hover{background:rgba(251,191,36,.25);border-color:rgba(251,191,36,.55)}
+.ibtn.renew:hover{background:rgba(16,185,129,.28);border-color:rgba(16,185,129,.6)}
+.link-chip{display:inline-flex;align-items:center;gap:.4rem;min-height:32px;padding:0 .8rem;border-radius:9999px;font-size:.76rem;font-weight:600;text-decoration:none;transition:transform .2s ease,background .2s ease,color .2s ease}
+.invoice-btn{color:#c9b8ff;background:rgba(161,140,209,.16);border:1px solid rgba(161,140,209,.4)}
+.invoice-btn:hover{color:#06101c;background:linear-gradient(135deg,#00f2fe,#a18cd1);transform:scale(1.04)}
+.cancel-btn{color:#fda4af;background:rgba(244,63,94,.13);border:1px solid rgba(244,63,94,.35)}
+.cancel-btn:hover{color:#06101c;background:linear-gradient(135deg,#fb7185,#fbbf24);transform:scale(1.04)}
+
+.input{width:100%;padding:.85rem 1rem;font-size:1rem;color:var(--text);background:var(--input-bg);border:1px solid var(--input-border);border-radius:1rem;transition:border-color .2s ease,box-shadow .2s ease,background-color .2s ease}
+.input::placeholder{color:var(--muted2)}
+.input:focus{outline:none;border-color:#00f2fe;background:rgba(0,242,254,.06);box-shadow:0 0 0 3px rgba(0,242,254,.15)}
+.input-icon{padding-left:2.8rem}
+select.input{appearance:none;-webkit-appearance:none;padding-right:2.5rem;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .95rem center}
+select.input option{background:#0e1321;color:#e8ecf5}
+input[type=date].input,input[type=month].input{color-scheme:dark}
+[data-theme="light"] input[type=date].input,[data-theme="light"] input[type=month].input{color-scheme:light}
+[data-theme="light"] select.input option{background:#fff;color:#101527}
+.label{display:block;margin-bottom:.4rem;font-size:.8rem;font-weight:500;color:var(--muted)}
+.check{display:flex;align-items:center;gap:.65rem;padding:.85rem 1rem;border-radius:1rem;background:var(--input-bg);border:1px solid var(--input-border);cursor:pointer}
+.check input{width:18px;height:18px;accent-color:#00f2fe}
+.dropzone{display:flex;align-items:center;gap:.9rem;padding:1rem 1.1rem;border-radius:1rem;cursor:pointer;background:rgba(255,255,255,.03);border:1.5px dashed var(--input-border);transition:border-color .25s ease,background-color .25s ease}
+[data-theme="light"] .dropzone{background:rgba(15,23,42,.02)}
+.dropzone:hover,.dropzone:focus-within{border-color:#00f2fe;background:rgba(0,242,254,.06)}
+
+.tile{display:grid;place-items:center;flex:none;width:3rem;height:3rem;border-radius:1rem;font-size:1.25rem;color:#0b1220;background:linear-gradient(135deg,var(--a),var(--b));box-shadow:0 10px 24px -10px var(--a);transition:transform .3s ease}
+.tile-sm{display:grid;place-items:center;flex:none;width:2.4rem;height:2.4rem;border-radius:.8rem;font-size:1rem;color:#0b1220;background:linear-gradient(135deg,var(--a),var(--b));box-shadow:0 8px 20px -10px var(--a)}
+.glass-hover:hover .tile{transform:scale(1.08) rotate(-4deg)}
+.badge{display:inline-flex;align-items:center;gap:.45rem;padding:.3rem .7rem;border-radius:9999px;font-size:.75rem;font-weight:600;border:1px solid}
+.b-red{color:#fda4af;background:rgba(244,63,94,.14);border-color:rgba(244,63,94,.42)}
+.b-amber{color:#fcd34d;background:rgba(251,191,36,.12);border-color:rgba(251,191,36,.4)}
+.b-green{color:#6ee7b7;background:rgba(16,185,129,.14);border-color:rgba(16,185,129,.4)}
+.b-gray{color:var(--muted);background:rgba(148,163,184,.12);border-color:rgba(148,163,184,.3)}
+.b-violet{color:#dcd0ff;background:rgba(161,140,209,.16);border-color:rgba(161,140,209,.45)}
+.dot{width:6px;height:6px;border-radius:9999px;background:currentColor;box-shadow:0 0 8px currentColor;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.avatar{display:grid;place-items:center;flex:none;overflow:hidden;border-radius:9999px;font-family:'Sora',sans-serif;font-weight:700;color:#06101c;background:linear-gradient(135deg,#00f2fe,#a18cd1)}
+
+.seg{display:inline-flex;padding:.3rem;gap:.2rem;border-radius:9999px;background:var(--input-bg);border:1px solid var(--input-border)}
+.seg button{display:inline-flex;align-items:center;gap:.4rem;min-height:38px;padding:0 1rem;border:0;border-radius:9999px;cursor:pointer;font-size:.85rem;font-weight:600;color:var(--muted);background:transparent;transition:color .2s ease,background .25s ease,box-shadow .25s ease}
+.seg button:hover{color:var(--text)}
+.seg button.on{color:#06101c;background:linear-gradient(135deg,#00f2fe,#4facfe);box-shadow:0 6px 20px -8px rgba(0,242,254,.8)}
+.seg .count{font-size:.7rem;padding:.1rem .45rem;border-radius:9999px;background:rgba(148,163,184,.25)}
+.seg button.on .count{background:rgba(6,16,28,.18)}
+
+.tab{display:flex;flex:1;flex-direction:column;align-items:center;gap:.2rem;padding:.6rem 0;border:0;background:none;cursor:pointer;font-size:.68rem;font-weight:600;color:#7f8aa3}
+.tab i{font-size:1.1rem;transition:transform .25s ease,filter .25s ease}
+.tab.tab-on{color:#00f2fe}
+.tab.tab-on i{transform:translateY(-2px);filter:drop-shadow(0 0 8px rgba(0,242,254,.75))}
+.fab{width:58px;height:58px;border-radius:9999px;border:0;cursor:pointer;font-size:1.3rem;color:#06101c;background:linear-gradient(135deg,#00f2fe,#4facfe 55%,#a18cd1);box-shadow:0 14px 36px -8px rgba(0,242,254,.7);transition:transform .25s ease}
+.fab:active{transform:scale(.92)}
+@media (max-width:767px){.m-off{display:none!important}}
+
+.modal{display:none}
+.modal.open{display:flex}
+.modal.open .sheet{animation:sheetIn .4s cubic-bezier(.2,.8,.2,1)}
+@keyframes sheetIn{from{transform:translateY(48px) scale(.98);opacity:0}to{transform:none;opacity:1}}
+.modal.open .scrim{animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.toast{display:flex;align-items:center;gap:.65rem;max-width:26rem;padding:.8rem 1.1rem;border-radius:1rem;font-size:.875rem;font-weight:500;pointer-events:auto;background:var(--panel-strong);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border:1px solid var(--panel-border);box-shadow:0 20px 50px -20px rgba(0,0,0,.7);animation:toastIn .35s cubic-bezier(.2,.8,.2,1);transition:opacity .3s ease,transform .3s ease}
+.toast.out{opacity:0;transform:translateY(-10px)}
+.toast-ok i{color:#00f2fe}
+.toast-err i{color:#fb7185}
+@keyframes toastIn{from{opacity:0;transform:translateY(-14px) scale(.96)}to{opacity:1;transform:none}}
+
+.spin{animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.logo-mark{display:grid;place-items:center;flex:none;width:38px;height:38px;border-radius:12px;font-size:1.05rem;color:#06101c;background:linear-gradient(135deg,#00f2fe,#4facfe 55%,#a18cd1);box-shadow:0 0 24px -4px rgba(0,242,254,.7)}
+.theme-toggle{position:relative;width:52px;height:30px;border-radius:9999px;border:1px solid var(--input-border);background:var(--input-bg);cursor:pointer}
+.theme-toggle .knob{position:absolute;top:2px;left:2px;width:24px;height:24px;border-radius:9999px;background:linear-gradient(135deg,#00f2fe,#a18cd1);display:grid;place-items:center;color:#06101c;font-size:.7rem;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+[data-theme="light"] .theme-toggle .knob{transform:translateX(22px)}
+
+/* calendar */
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.35rem}
+.cal-dow{text-align:center;font-size:.68rem;font-weight:700;color:var(--muted);letter-spacing:.04em;padding-bottom:.35rem}
+.cal-cell{position:relative;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;border-radius:.8rem;font-size:.8rem;font-weight:600;color:var(--text);background:var(--input-bg);border:1px solid transparent}
+.cal-cell.today{border-color:#00f2fe;box-shadow:0 0 0 2px rgba(0,242,254,.2)}
+.cal-cell.has-due{cursor:help}
+.cal-cell .cdots{display:flex;gap:2px}
+.cal-cell .cdots span{width:5px;height:5px;border-radius:9999px;background:#fb7185;box-shadow:0 0 6px #fb7185}
+
+/* legal modal body */
+.legal-body{font-size:.92rem;line-height:1.7;color:var(--muted)}
+.legal-body h4{margin:1.1rem 0 .35rem;font-family:'Sora',sans-serif;font-weight:700;color:var(--text);font-size:1rem}
+.legal-body p{margin:.4rem 0}
+.legal-body a{color:#4facfe;text-decoration:underline}
+
+/* AI insights */
+.insight-row{display:flex;align-items:flex-start;gap:.65rem;padding:.65rem 0;border-top:1px solid var(--divider);font-size:.85rem;color:var(--text)}
+.insight-row:first-child{border-top:0;padding-top:0}
+.insight-row i{margin-top:.15rem;flex:none;color:#00f2fe}
+.insight-empty{font-size:.85rem;color:var(--muted)}
+
+/* Worth-it rating */
+.worth-row{display:flex;gap:.5rem}
+.worth-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:.25rem;padding:.65rem .5rem;border-radius:.9rem;background:var(--input-bg);border:1px solid var(--input-border);cursor:pointer;font-size:.72rem;font-weight:600;color:var(--muted);transition:border-color .2s ease,color .2s ease,background-color .2s ease}
+.worth-btn i{font-size:1.05rem}
+.worth-btn:hover{color:var(--text)}
+.worth-btn.on[data-worth="worth"]{color:#6ee7b7;border-color:rgba(16,185,129,.5);background:rgba(16,185,129,.12)}
+.worth-btn.on[data-worth="neutral"]{color:#fcd34d;border-color:rgba(251,191,36,.5);background:rgba(251,191,36,.12)}
+.worth-btn.on[data-worth="regret"]{color:#fda4af;border-color:rgba(244,63,94,.5);background:rgba(244,63,94,.12)}
+.worth-pill{font-size:.9rem;line-height:1}
+
+/* Price change badge */
+.price-up{display:inline-flex;align-items:center;gap:.3rem;font-size:.7rem;font-weight:600;color:#fda4af}
+
+/* Premium / Coming Soon */
+.plan-card{position:relative;cursor:pointer}
+.plan-card.pro-glow{border-color:rgba(0,242,254,.5)!important;box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 20px 50px -20px rgba(0,242,254,.5)}
+.plan-card.pro-glow:hover{box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 26px 60px -18px rgba(0,242,254,.65)}
+.best-seller{position:absolute;top:-.85rem;left:50%;transform:translateX(-50%);padding:.3rem 1rem;border-radius:9999px;font-family:'Sora',sans-serif;font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#06101c;background:linear-gradient(135deg,#00f2fe,#4facfe);white-space:nowrap}
+.coming-soon-badge{position:absolute;top:1rem;right:1rem;z-index:2;display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .7rem;border-radius:9999px;font-family:'Sora',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#06101c;background:linear-gradient(135deg,#00f2fe,#a18cd1);box-shadow:0 0 14px rgba(0,242,254,.7);animation:csGlow 2s ease-in-out infinite}
+@keyframes csGlow{0%,100%{box-shadow:0 0 8px rgba(0,242,254,.5)}50%{box-shadow:0 0 18px rgba(161,140,209,.8)}}
+.plan-check{display:flex;align-items:flex-start;gap:.55rem;font-size:.85rem}
+.plan-check i{margin-top:.2rem;color:#00f2fe;flex:none}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.glass-hover:hover{transform:none}}
+</style>
+</head>
+<body>
+
+<div aria-hidden="true"><span class="blob blob-1"></span><span class="blob blob-2"></span><span class="blob blob-3"></span></div>
+
+<div id="boot" style="position:fixed;inset:0;z-index:300;display:grid;place-items:center;background:#0b0f19">
+    <div class="flex flex-col items-center gap-4">
+        <span class="logo-mark animate-floaty" style="width:56px;height:56px;font-size:1.5rem;border-radius:18px"><i class="fa-solid fa-layer-group"></i></span>
+        <div class="skel h-2 w-28"></div>
+    </div>
+</div>
+
+<div id="toasts" class="pointer-events-none fixed inset-x-0 top-0 z-[250] flex flex-col items-center gap-2 px-4 pt-[calc(env(safe-area-inset-top)+1rem)]" role="status" aria-live="polite"></div>
+
+<!-- ================= AUTH ================= -->
+<section id="auth-screen" class="is-hidden relative z-10 grid min-h-screen lg:grid-cols-2">
+    <div class="relative flex flex-col justify-between gap-10 p-6 sm:p-10 lg:p-14">
+        <div class="flex items-center gap-3">
+            <span class="logo-mark"><i class="fa-solid fa-layer-group"></i></span>
+            <span class="font-display text-xl font-bold tracking-tight">SubTrack <span class="text-neon">AI Pro</span></span>
+        </div>
+        <div class="max-w-xl">
+            <h1 class="font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">Every subscription.<br><span class="text-neon">One clear picture.</span></h1>
+            <p class="mt-5 max-w-md text-base sm:text-lg" style="color:var(--muted)">Track renewals, split shared plans, catch trials before they charge, and keep every invoice in one place.</p>
+            <ul class="mt-8 hidden gap-4 lg:grid">
+                <li class="flex items-center gap-3" style="color:var(--text)"><span class="tile-sm" style="--a:#00f2fe;--b:#4facfe"><i class="fa-solid fa-bell"></i></span>See what is due before it is charged</li>
+                <li class="flex items-center gap-3" style="color:var(--text)"><span class="tile-sm" style="--a:#4facfe;--b:#a18cd1"><i class="fa-solid fa-wand-magic-sparkles"></i></span>Scan a receipt and auto-fill the details</li>
+                <li class="flex items-center gap-3" style="color:var(--text)"><span class="tile-sm" style="--a:#a18cd1;--b:#f472b6"><i class="fa-solid fa-users"></i></span>Split shared plans with friends fairly</li>
+            </ul>
+        </div>
+        <div class="pointer-events-none relative hidden h-44 lg:block" aria-hidden="true">
+            <div class="glass absolute left-0 top-0 flex w-72 animate-floaty items-center gap-3 rounded-3xl p-4">
+                <span class="tile" style="--a:#00f2fe;--b:#4facfe"><i class="fa-solid fa-robot"></i></span>
+                <div class="min-w-0 flex-1"><p class="font-display font-semibold">Sample AI tool</p><span class="badge b-red mt-1"><span class="dot"></span>Due in 2 days</span></div>
+                <p class="font-display font-bold">₹1,999</p>
+            </div>
+            <div class="glass absolute left-24 top-20 flex w-72 animate-floaty-slow items-center gap-3 rounded-3xl p-4">
+                <span class="tile" style="--a:#34d399;--b:#00f2fe"><i class="fa-brands fa-spotify"></i></span>
+                <div class="min-w-0 flex-1"><p class="font-display font-semibold">Sample music app</p><span class="badge b-green mt-1">Paid</span></div>
+                <p class="font-display font-bold">₹119</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex items-center justify-center p-5 pb-12 sm:p-10">
+        <div class="glass w-full max-w-md rounded-[2rem] p-6 sm:p-8">
+            <h2 id="auth-heading" class="font-display text-2xl font-bold tracking-tight">Welcome back</h2>
+            <p id="auth-sub" class="mt-1 text-sm" style="color:var(--muted)">Log in to see your dashboard.</p>
+            <div class="seg mt-6 w-full" role="tablist" aria-label="Login or sign up">
+                <button id="tab-login" type="button" class="on flex-1 justify-center" role="tab" aria-selected="true">Log in</button>
+                <button id="tab-signup" type="button" class="flex-1 justify-center" role="tab" aria-selected="false">Sign up</button>
+            </div>
+            <button id="btn-google" type="button" class="btn-white mt-6">
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" width="20" height="20" alt="">
+                Continue with Google
+            </button>
+            <div class="my-5 flex items-center gap-3 text-xs" style="color:var(--muted2)"><span class="h-px flex-1" style="background:var(--divider)"></span>or use email<span class="h-px flex-1" style="background:var(--divider)"></span></div>
+            <form id="auth-form" class="grid gap-3" novalidate>
+                <div class="relative">
+                    <i class="fa-regular fa-envelope pointer-events-none absolute left-4 top-1/2 -translate-y-1/2" style="color:var(--muted2)"></i>
+                    <input id="auth-email" type="email" class="input input-icon" placeholder="Email address" autocomplete="email" aria-label="Email address">
+                </div>
+                <div class="relative">
+                    <i class="fa-solid fa-lock pointer-events-none absolute left-4 top-1/2 -translate-y-1/2" style="color:var(--muted2)"></i>
+                    <input id="auth-pass" type="password" class="input input-icon pr-12" placeholder="Password" autocomplete="current-password" aria-label="Password">
+                    <button id="btn-eye" type="button" class="absolute right-2 top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full" style="color:var(--muted)" aria-label="Show password"><i class="fa-regular fa-eye"></i></button>
+                </div>
+                <div class="flex justify-end"><button id="btn-forgot" type="button" class="text-xs font-medium hover:underline" style="color:#4facfe">Forgot password?</button></div>
+                <button id="btn-auth-submit" type="submit" class="btn-neon w-full">Log in</button>
+            </form>
+            <p id="auth-error" class="is-hidden mt-4 rounded-xl border border-rose-500/40 bg-rose-500/10 px-3 py-2 text-sm text-rose-200" role="alert"></p>
+        </div>
+    </div>
+</section>
+
+<!-- ================= APP ================= -->
+<div id="app-screen" class="is-hidden relative z-10 flex min-h-screen flex-col">
+    <header class="glass-bar sticky top-0 z-40 border-b pt-[env(safe-area-inset-top)]">
+        <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 md:px-6">
+            <div class="flex items-center gap-3">
+                <span class="logo-mark"><i class="fa-solid fa-layer-group"></i></span>
+                <span class="font-display text-lg font-bold tracking-tight">SubTrack</span>
+                <span class="rounded-full bg-gradient-to-r from-neon-cyan to-neon-violet px-2 py-0.5 font-display text-[10px] font-bold text-ink">PRO</span>
+            </div>
+            <nav class="hidden items-center gap-1 md:flex" aria-label="Sections">
+                <button type="button" data-jump="sec-overview" class="rounded-full px-4 py-2 text-sm font-medium transition hover:bg-white/10" style="color:var(--muted)">Overview</button>
+                <button type="button" data-jump="sec-subs" class="rounded-full px-4 py-2 text-sm font-medium transition hover:bg-white/10" style="color:var(--muted)">Subscriptions</button>
+                <button type="button" data-jump="sec-premium" class="rounded-full px-4 py-2 text-sm font-medium transition hover:bg-white/10" style="color:var(--muted)"><i class="fa-solid fa-crown mr-1" style="color:#00f2fe"></i>Level Up</button>
+            </nav>
+            <div class="flex items-center gap-2 md:gap-3">
+                <button id="btn-theme" type="button" class="theme-toggle" aria-label="Toggle light and dark theme" title="Toggle theme"><span class="knob"><i id="theme-icon" class="fa-solid fa-moon"></i></span></button>
+                <button id="btn-currency" type="button" class="pill" aria-label="Switch currency"><i class="fa-solid fa-coins"></i><span class="cur-label">₹ INR</span></button>
+                <button id="btn-voice" type="button" class="ibtn is-hidden" title="Voice commands" aria-label="Voice commands"><i class="fa-solid fa-microphone"></i></button>
+                <div class="hidden md:block"><button id="btn-add-top" type="button" class="btn-neon !min-h-[42px] !px-5 text-sm"><i class="fa-solid fa-plus"></i>Add subscription</button></div>
+                <div class="hidden items-center gap-2 border-l pl-3 md:flex" style="border-color:var(--divider)">
+                    <div id="avatar-top" class="avatar h-9 w-9 text-sm"></div>
+                    <button id="btn-logout-top" type="button" class="ibtn" title="Sign out" aria-label="Sign out"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="mx-auto w-full max-w-7xl flex-1 px-4 pb-32 pt-6 md:px-6 md:pb-16 md:pt-8">
+        <div id="panels" class="grid grid-cols-12 gap-4 md:gap-5">
+
+            <div id="trial-warning" class="alertbar is-hidden col-span-12 flex items-start gap-3 rounded-3xl border border-rose-500/45 bg-rose-500/10 px-4 py-3 text-sm text-rose-100" role="alert" style="display:none">
+                <i class="fa-solid fa-hourglass-end mt-0.5 text-rose-300"></i>
+                <span id="trial-warning-text"></span>
+            </div>
+            <div id="budget-warning" class="is-hidden col-span-12 flex items-center gap-3 rounded-3xl border border-amber-500/45 bg-amber-500/10 px-4 py-3 text-sm text-amber-100" role="alert" style="display:none">
+                <i class="fa-solid fa-triangle-exclamation text-amber-300"></i>
+                <span id="budget-warning-text"></span>
+            </div>
+
+            <section data-panel="overview" class="glass col-span-12 rounded-3xl p-5 md:p-6" aria-labelledby="coach-title">
+                <div class="flex items-center gap-3">
+                    <span class="tile-sm" style="--a:#00f2fe;--b:#a18cd1"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                    <div>
+                        <h2 id="coach-title" class="font-display text-base font-semibold">AI Spending Coach</h2>
+                        <p class="text-xs" style="color:var(--muted)">Calculated from your own data &mdash; not live market prices</p>
+                    </div>
+                </div>
+                <div id="coach-body" class="mt-3">
+                    <p class="insight-empty">Add a subscription to get your first insight.</p>
+                </div>
+            </section>
+
+            <section id="sec-overview" data-panel="overview" class="col-span-12 grid scroll-mt-24 grid-cols-1 gap-4 md:grid-cols-3 md:gap-5" aria-label="Spending metrics">
+                <div class="glass glass-hover rounded-3xl p-5 md:p-6">
+                    <div class="flex items-start justify-between gap-3"><p class="text-sm font-medium" style="color:var(--muted)">Your monthly spend</p><span class="tile-sm" style="--a:#00f2fe;--b:#4facfe"><i class="fa-solid fa-wallet"></i></span></div>
+                    <p id="m-monthly" class="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl"></p>
+                    <p id="m-monthly-cap" class="mt-2 text-sm" style="color:var(--muted)"></p>
+                </div>
+                <div class="glass glass-hover rounded-3xl p-5 md:p-6">
+                    <div class="flex items-start justify-between gap-3"><p class="text-sm font-medium" style="color:var(--muted)">Your yearly spend</p><span class="tile-sm" style="--a:#4facfe;--b:#a18cd1"><i class="fa-solid fa-calendar-days"></i></span></div>
+                    <p id="m-yearly" class="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl"></p>
+                    <p id="m-yearly-cap" class="mt-2 text-sm" style="color:var(--muted)"></p>
+                </div>
+                <div class="glass glass-hover rounded-3xl p-5 md:p-6">
+                    <div class="flex items-start justify-between gap-3"><p class="text-sm font-medium" style="color:var(--muted)">Highest expense</p><span class="tile-sm" style="--a:#a18cd1;--b:#f472b6"><i class="fa-solid fa-arrow-trend-up"></i></span></div>
+                    <p id="m-high" class="mt-3 font-display text-3xl font-bold tracking-tight md:text-4xl"></p>
+                    <p id="m-high-cap" class="mt-2 truncate text-sm" style="color:var(--muted)"></p>
+                </div>
+            </section>
+
+            <section data-panel="overview" class="glass col-span-12 rounded-3xl p-5 md:p-6 lg:col-span-5" aria-labelledby="cat-title">
+                <h2 id="cat-title" class="font-display text-lg font-semibold">Category breakdown</h2>
+                <p class="text-sm" style="color:var(--muted)">Your monthly share, by category</p>
+                <div class="relative mt-4 h-72">
+                    <div id="cat-skel" class="skel absolute inset-0 !rounded-2xl"></div>
+                    <canvas id="cat-chart" class="is-hidden" role="img" aria-label="Doughnut chart of monthly spend by category"></canvas>
+                    <p id="cat-empty" class="is-hidden absolute inset-0 grid place-items-center px-6 text-center text-sm" style="color:var(--muted)">Add an active subscription to see your category breakdown.</p>
+                </div>
+            </section>
+
+            <section data-panel="overview" class="glass col-span-12 rounded-3xl p-5 md:p-6 lg:col-span-7" aria-labelledby="bar-title">
+                <h2 id="bar-title" class="font-display text-lg font-semibold">Upcoming renewals by month</h2>
+                <p class="text-sm" style="color:var(--muted)">What will be charged over the next 6 months</p>
+                <div class="relative mt-4 h-72">
+                    <div id="bar-skel" class="skel absolute inset-0 !rounded-2xl"></div>
+                    <canvas id="bar-chart" class="is-hidden" role="img" aria-label="Bar chart of upcoming renewals by month"></canvas>
+                    <p id="bar-empty" class="is-hidden absolute inset-0 grid place-items-center px-6 text-center text-sm" style="color:var(--muted)">No renewals coming up in the next 6 months.</p>
+                </div>
+            </section>
+
+            <section data-panel="overview" class="glass col-span-12 rounded-3xl p-5 md:p-6" aria-labelledby="cal-title">
+                <div class="flex items-center justify-between gap-3">
+                    <div>
+                        <h2 id="cal-title" class="font-display text-lg font-semibold">Renewal calendar</h2>
+                        <p id="cal-month-label" class="text-sm" style="color:var(--muted)"></p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button id="cal-prev" type="button" class="ibtn" aria-label="Previous month"><i class="fa-solid fa-chevron-left"></i></button>
+                        <button id="cal-next" type="button" class="ibtn" aria-label="Next month"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div class="cal-grid mt-4">
+                    <span class="cal-dow">S</span><span class="cal-dow">M</span><span class="cal-dow">T</span><span class="cal-dow">W</span><span class="cal-dow">T</span><span class="cal-dow">F</span><span class="cal-dow">S</span>
+                </div>
+                <div id="cal-days" class="cal-grid mt-1"></div>
+            </section>
+
+            <section id="sec-subs" data-panel="subs" class="col-span-12 scroll-mt-24" aria-labelledby="subs-title">
+                <div class="mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                    <div>
+                        <h2 id="subs-title" class="font-display text-xl font-semibold md:text-2xl">Subscriptions</h2>
+                        <p class="text-sm" style="color:var(--muted)">Track renewals, invoices and status.</p>
+                    </div>
+                    <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+                        <div class="seg self-start" role="tablist" aria-label="Filter subscriptions">
+                            <button type="button" data-filter="all" class="on" role="tab" aria-selected="true">All <span class="count" id="cnt-all">0</span></button>
+                            <button type="button" data-filter="active" role="tab" aria-selected="false">Active <span class="count" id="cnt-active">0</span></button>
+                            <button type="button" data-filter="cancelled" role="tab" aria-selected="false">Cancelled <span class="count" id="cnt-cancelled">0</span></button>
+                        </div>
+                        <div class="relative sm:w-56">
+                            <i class="fa-solid fa-magnifying-glass pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm" style="color:var(--muted2)"></i>
+                            <input id="search-input" type="search" class="input input-icon !rounded-full !py-2.5" placeholder="Search subscriptions" aria-label="Search subscriptions">
+                        </div>
+                        <button id="btn-export" type="button" class="btn-ghost !min-h-[42px] !px-4 text-sm"><i class="fa-solid fa-file-csv"></i><span class="hidden sm:inline">Export CSV</span></button>
+                    </div>
+                </div>
+                <div id="sub-list" class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3"></div>
+            </section>
+
+            <section data-panel="account" class="glass col-span-12 rounded-3xl p-6 md:hidden" aria-label="Account">
+                <div class="flex items-center gap-4">
+                    <div id="avatar-acct" class="avatar h-14 w-14 text-xl"></div>
+                    <div class="min-w-0"><p id="acct-name" class="truncate font-display font-semibold"></p><p id="acct-email" class="truncate text-sm" style="color:var(--muted)"></p></div>
+                </div>
+                <div class="mt-6 grid gap-3">
+                    <button id="btn-currency-2" type="button" class="btn-ghost justify-between"><span class="flex items-center gap-2"><i class="fa-solid fa-coins" style="color:#00f2fe"></i>Currency</span><span class="cur-label" style="color:#00f2fe">₹ INR</span></button>
+                    <button id="btn-theme-2" type="button" class="btn-ghost justify-between"><span class="flex items-center gap-2"><i class="fa-solid fa-circle-half-stroke" style="color:#00f2fe"></i>Theme</span><span id="theme-label-2" style="color:#00f2fe">Dark</span></button>
+                    <button id="btn-logout-acct" type="button" class="btn-ghost"><i class="fa-solid fa-arrow-right-from-bracket"></i>Sign out</button>
+                </div>
+            </section>
+
+            <section class="glass col-span-12 rounded-3xl p-6" aria-labelledby="budget-title">
+                <h2 id="budget-title" class="font-display text-lg font-semibold"><i class="fa-solid fa-piggy-bank mr-2 text-sm" style="color:#00f2fe"></i>Monthly budget</h2>
+                <p class="text-sm" style="color:var(--muted)">Get warned when your active subscriptions go over this.</p>
+                <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <div class="relative flex-1 sm:max-w-xs">
+                        <span id="budget-cur-sign" class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm font-semibold" style="color:var(--muted)">₹</span>
+                        <input id="budget-input" type="number" min="0" step="1" class="input input-icon" placeholder="e.g. 5000">
+                    </div>
+                    <button id="btn-save-budget" type="button" class="btn-ghost !min-h-[44px]"><i class="fa-solid fa-floppy-disk"></i>Save budget</button>
+                </div>
+                <div id="budget-bar-wrap" class="is-hidden mt-4">
+                    <div class="mb-1 flex items-center justify-between text-xs" style="color:var(--muted)"><span id="budget-bar-text"></span><span id="budget-bar-pct"></span></div>
+                    <div class="h-2 overflow-hidden rounded-full" style="background:var(--input-bg)"><div id="budget-bar" class="h-full w-0 rounded-full transition-all duration-300" style="background:linear-gradient(90deg,#00f2fe,#4facfe,#a18cd1)"></div></div>
+                </div>
+            </section>
+
+            <section class="glass col-span-12 rounded-3xl p-6" aria-labelledby="backup-title">
+                <h2 id="backup-title" class="font-display text-lg font-semibold"><i class="fa-solid fa-cloud-arrow-down mr-2 text-sm" style="color:#00f2fe"></i>Backup &amp; restore</h2>
+                <p class="text-sm" style="color:var(--muted)">Your data already syncs live to your account. Export a copy any time, or restore from one on a new device.</p>
+                <div class="mt-4 flex flex-wrap gap-3">
+                    <button id="btn-backup-export" type="button" class="btn-ghost !min-h-[44px]"><i class="fa-solid fa-download"></i>Export backup (JSON)</button>
+                    <label class="btn-ghost !min-h-[44px]" style="cursor:pointer">
+                        <i class="fa-solid fa-upload"></i>Import backup
+                        <input id="btn-backup-import" type="file" accept="application/json" class="sr-only">
+                    </label>
+                </div>
+            </section>
+
+            <section class="glass col-span-12 rounded-3xl p-6" aria-labelledby="family-title">
+                <h2 id="family-title" class="font-display text-lg font-semibold"><i class="fa-solid fa-people-roof mr-2 text-sm" style="color:#00f2fe"></i>Family</h2>
+                <p class="text-sm" style="color:var(--muted)">Share visibility of a plan's cost with people using a join code &mdash; everyone who joins can see and add to the shared list below.</p>
+
+                <div id="family-none" class="mt-4 grid gap-3 sm:grid-cols-2">
+                    <button id="btn-family-create" type="button" class="btn-ghost !min-h-[44px]"><i class="fa-solid fa-plus"></i>Create a family</button>
+                    <div class="flex gap-2">
+                        <input id="family-code-input" type="text" class="input flex-1 uppercase" placeholder="Enter join code" autocomplete="off">
+                        <button id="btn-family-join" type="button" class="btn-ghost !px-4">Join</button>
+                    </div>
+                </div>
+
+                <div id="family-in" class="is-hidden mt-4">
+                    <div class="flex flex-wrap items-center justify-between gap-3 rounded-2xl p-4" style="background:var(--input-bg);border:1px solid var(--input-border)">
+                        <div>
+                            <p class="text-xs" style="color:var(--muted)">Join code</p>
+                            <p id="family-code-display" class="font-display text-lg font-bold tracking-widest"></p>
+                        </div>
+                        <p id="family-member-count" class="text-sm" style="color:var(--muted)"></p>
+                        <button id="btn-family-leave" type="button" class="btn-ghost !min-h-[38px] text-xs">Leave family</button>
+                    </div>
+
+                    <div class="mt-4 grid gap-2 sm:grid-cols-4">
+                        <input id="fam-sub-name" type="text" class="input sm:col-span-2" placeholder="Shared plan name">
+                        <input id="fam-sub-price" type="number" min="0" step="0.01" class="input" placeholder="Monthly price">
+                        <button id="btn-family-add-sub" type="button" class="btn-ghost">Add shared</button>
+                    </div>
+
+                    <div id="family-sub-list" class="mt-4 grid gap-2">
+                        <p class="insight-empty">No shared subscriptions yet.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sec-premium" data-panel="premium" class="col-span-12 scroll-mt-24" aria-labelledby="premium-title">
+                <div class="mb-6 text-center">
+                    <h2 id="premium-title" class="font-display text-2xl font-bold tracking-tight md:text-3xl">Level up with <span class="text-neon">Vroxit Premium</span></h2>
+                    <p class="mx-auto mt-2 max-w-md text-sm" style="color:var(--muted)">Prepaid passes, no AutoPay &mdash; pay once, use the pass, done.</p>
+                </div>
+
+                <div id="premium-locked" class="grid gap-4 md:grid-cols-3">
+                    <article class="glass glass-hover plan-card rounded-3xl p-6" data-plan="plus">
+                        <span class="coming-soon-badge">Coming Soon</span>
+                        <h3 class="font-display text-xl font-bold">Plus</h3>
+                        <p class="mt-2"><span class="font-display text-3xl font-bold">₹49</span><span class="text-sm" style="color:var(--muted)"> / 30 days</span></p>
+                        <ul class="mt-5 grid gap-2.5">
+                            <li class="plan-check"><i class="fa-solid fa-circle-check"></i>Track up to 20 subscriptions</li>
+                            <li class="plan-check"><i class="fa-solid fa-circle-check"></i>Basic renewal reminders</li>
+                            <li class="plan-check"><i class="fa-solid fa-circle-check"></i>Ad-free</li>
+                        </ul>
+                        <button type="button" class="plan-cta btn-ghost mt-6 w-full" data-live-label="Buy Plus Pass">Buy Plus Pass</button>
+                    </article>
+
+                    <article class="glass glass-hover plan-card pro-glow rounded-3xl p-6" data-plan="pro">
+                        <span class="best-seller">Best value</span>
+                        <span class="coming-soon-badge">Coming Soon</span>
+                        <h3 class="font-display text-xl font-bold text-neon">Pro</h3>
+                        <p class="mt-2"><span class="font-display text-3xl font-bold">₹99</span><span class="text-sm" style="color:var(--muted)"> / 30 days</span></p>
+                        <ul class="mt-5 grid gap-2.5">
+                            <li class="plan-check"><i class="fa-solid fa-circle-check"></i>Unlimited subscriptions</li>
+                            <li class="plan-check"><i class="fa-solid fa-circle-check"></i>Priority AI receipt scans</li>
+                            <li class="plan-check"><i class="fa-solid fa-circle-check"></i>Everything in Plus</li>
+                        </ul>
+                        <button type="button" class="plan-cta btn-neon mt-6 w-full" data-live-label="Buy Pro Pass">Buy Pro Pass</button>
+                    </article>
+
+                    <article class="glass glass-hover plan-card rounded-3xl p-6" data-plan="max">
+                        <span class="coming-soon-badge">Coming Soon</span>
+                        <h3 class="font-display text-xl font-bold">Max</h3>
+                        <p class="mt-2"><span class="font-display text-3xl font-bold">₹199</span><span class="text-sm" style="color:var(--muted)"> / 30 days</span></p>
+                        <ul class="mt-5 grid gap-2.5">
+                            <li class="plan-check"><i class="fa-solid fa-circle-check"></i>Everything in Pro</li>
+                            <li class="plan-check"><i class="fa-solid fa-circle-check"></i>Family sync (up to 4)</li>
+                            <li class="plan-check"><i class="fa-solid fa-circle-check"></i>AI spending coach, expanded</li>
+                        </ul>
+                        <button type="button" class="plan-cta btn-ghost mt-6 w-full" data-live-label="Buy Max Pass">Buy Max Pass</button>
+                    </article>
+                </div>
+
+                <div class="glass mt-4 rounded-3xl p-6 md:mx-auto md:max-w-md">
+                    <p class="text-xs font-semibold uppercase tracking-wider" style="color:var(--muted)">Have a VIP activation code?</p>
+                    <div class="mt-3 flex gap-2">
+                        <input id="vip-code" type="text" class="input flex-1 uppercase" placeholder="e.g. VROXPRO-99" autocomplete="off">
+                        <button id="btn-apply-vip" type="button" class="btn-ghost !px-5">Apply</button>
+                    </div>
+                    <p id="vip-error" class="is-hidden mt-2 text-xs text-rose-300"><i class="fa-solid fa-circle-exclamation mr-1"></i>Invalid activation code.</p>
+                </div>
+
+                <div id="premium-unlocked" class="is-hidden glass mt-4 rounded-3xl p-8 text-center">
+                    <span class="tile mx-auto" style="--a:#00f2fe;--b:#a18cd1"><i class="fa-solid fa-crown"></i></span>
+                    <h3 class="mt-4 font-display text-xl font-bold">Your Pro pass is active</h3>
+                    <p class="mx-auto mt-1 max-w-sm text-sm" style="color:var(--muted)">Thanks for testing Vroxit Premium early &mdash; this was unlocked with a VIP code, not a real payment.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="relative z-10 mt-4 border-t px-4 py-8 text-center text-sm md:px-6" style="border-color:var(--divider);color:var(--muted)">
+        <div class="mx-auto flex max-w-7xl flex-col items-center gap-4 md:flex-row md:justify-between">
+            <p>© <span id="footer-year"></span> SubTrack AI Pro · Built by Vroxit Developer Team</p>
+            <nav class="flex flex-wrap justify-center gap-x-5 gap-y-2" aria-label="Legal">
+                <button type="button" class="hover:text-white hover:underline" data-legal="privacy">Privacy Policy</button>
+                <button type="button" class="hover:text-white hover:underline" data-legal="terms">Terms &amp; Conditions</button>
+                <button type="button" class="hover:text-white hover:underline" data-legal="disclaimer">Disclaimer</button>
+                <button type="button" class="hover:text-white hover:underline" data-legal="about">About Us</button>
+                <button type="button" id="btn-open-contact" class="hover:text-white hover:underline">Contact Us</button>
+            </nav>
+        </div>
+    </footer>
+
+    <button id="fab-add" type="button" class="fab fixed right-4 z-40 md:hidden" style="bottom:calc(4.75rem + env(safe-area-inset-bottom))" aria-label="Add subscription"><i class="fa-solid fa-plus"></i></button>
+
+    <nav class="glass-bar fixed inset-x-0 bottom-0 z-40 flex border-t pb-[env(safe-area-inset-bottom)] md:hidden" style="border-color:var(--divider)" aria-label="Main">
+        <button type="button" class="tab tab-on" data-nav="overview"><i class="fa-solid fa-chart-pie"></i>Overview</button>
+        <button type="button" class="tab" data-nav="subs"><i class="fa-solid fa-layer-group"></i>Subs</button>
+        <button type="button" class="tab" data-nav="premium"><i class="fa-solid fa-crown"></i>Level Up</button>
+        <button type="button" class="tab" data-nav="account"><i class="fa-solid fa-user"></i>Account</button>
+    </nav>
+</div>
+
+<!-- ================= ADD/EDIT MODAL ================= -->
+<div id="modal" class="modal fixed inset-0 z-[100] items-end justify-center md:items-center md:p-6" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="scrim absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+    <div class="sheet glass-strong relative max-h-[92vh] w-full overflow-y-auto rounded-t-[2rem] p-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] md:max-w-lg md:rounded-[2rem]">
+        <div class="mx-auto mb-4 h-1.5 w-12 rounded-full bg-white/20 md:hidden"></div>
+        <div class="mb-6 flex items-center justify-between gap-4">
+            <h2 id="modal-title" class="font-display text-xl font-bold">Add subscription</h2>
+            <button id="btn-close-modal" type="button" class="ibtn" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="grid gap-4">
+            <input type="hidden" id="sub-id">
+
+            <!-- Invoice upload + AI scan -->
+            <div>
+                <span class="label">Invoice or receipt (PDF or image, max 10 MB)</span>
+                <label for="sub-invoice" class="dropzone">
+                    <span class="tile-sm" style="--a:#a18cd1;--b:#4facfe"><i class="fa-solid fa-cloud-arrow-up"></i></span>
+                    <span class="min-w-0 flex-1">
+                        <span id="file-name" class="block truncate text-sm font-medium">Tap to attach a file</span>
+                        <span class="block text-xs" style="color:var(--muted2)">Uploaded securely to your private storage</span>
+                    </span>
+                    <button id="file-clear" type="button" class="ibtn is-hidden" aria-label="Remove selected file"><i class="fa-solid fa-xmark"></i></button>
+                    <input id="sub-invoice" type="file" accept=".pdf, image/*" class="sr-only">
+                </label>
+                <p id="current-invoice" class="is-hidden mt-2 text-xs text-emerald-300"><i class="fa-solid fa-paperclip mr-1"></i>An invoice is already attached. Choose a new file to replace it.</p>
+                <button id="btn-ai-scan" type="button" class="btn-ghost is-hidden mt-2 !min-h-[40px] w-full text-sm"><i class="fa-solid fa-wand-magic-sparkles" style="color:#00f2fe"></i>Scan with AI &mdash; auto-fill details</button>
+                <p id="ai-scan-status" class="is-hidden mt-2 flex items-center gap-2 text-xs" style="color:#7fd8ff"><i class="fa-solid fa-spinner spin"></i><span id="ai-scan-status-text">Reading file...</span></p>
+                <div id="upload-wrap" class="is-hidden mt-3">
+                    <div class="mb-1 flex items-center justify-between text-xs" style="color:var(--muted)"><span id="upload-text">Uploading invoice...</span><span id="upload-pct">0%</span></div>
+                    <div class="h-2 overflow-hidden rounded-full" style="background:var(--input-bg)"><div id="upload-bar" class="h-full w-0 rounded-full bg-gradient-to-r from-neon-cyan via-neon-blue to-neon-violet transition-all duration-200"></div></div>
+                </div>
+            </div>
+
+            <div>
+                <label class="label" for="sub-name">App name</label>
+                <input id="sub-name" type="text" class="input" placeholder="e.g. Netflix, ChatGPT Plus" autocomplete="off">
+            </div>
+            <p id="alt-tip" class="is-hidden rounded-xl border border-cyan-400/30 bg-cyan-400/10 px-3 py-2 text-xs" style="color:#7fd8ff"><i class="fa-solid fa-lightbulb mr-1"></i><span id="alt-tip-text"></span></p>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="label" for="sub-price" id="price-label">Price</label>
+                    <input id="sub-price" type="number" inputmode="decimal" step="0.01" min="0" class="input" placeholder="0.00">
+                </div>
+                <div>
+                    <label class="label" for="sub-currency">Billed in</label>
+                    <select id="sub-currency" class="input"><option value="INR">₹ INR</option><option value="USD">$ USD</option></select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="label" for="sub-cycle">Billing cycle</label>
+                    <select id="sub-cycle" class="input"><option value="monthly">Monthly</option><option value="yearly">Yearly</option></select>
+                </div>
+                <div>
+                    <label class="label" for="sub-category">Category</label>
+                    <select id="sub-category" class="input">
+                        <option value="AI Tools">AI Tools</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Productivity">Productivity</option>
+                        <option value="Health/Gym">Health/Gym</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="label" for="sub-date">Next renewal</label>
+                    <input id="sub-date" type="date" class="input">
+                </div>
+                <div>
+                    <label class="label" for="sub-status">Status</label>
+                    <select id="sub-status" class="input"><option value="active">Active</option><option value="cancelled">Cancelled</option></select>
+                </div>
+            </div>
+
+            <label class="check">
+                <input id="sub-trial" type="checkbox">
+                <span class="text-sm"><span class="font-medium">This is a free trial</span><span class="block text-xs" style="color:var(--muted2)">Get a red warning before it converts to a paid charge</span></span>
+            </label>
+
+            <label class="check">
+                <input id="sub-gst" type="checkbox">
+                <span class="text-sm"><span class="font-medium">Price includes 18% GST</span><span class="block text-xs" style="color:var(--muted2)">Just shows a base + GST split on the card &mdash; standard digital-services rate, not filed tax advice</span></span>
+            </label>
+
+            <div>
+                <label class="label" for="sub-split">Split with friends (people sharing this plan)</label>
+                <input id="sub-split" type="number" min="1" step="1" value="1" class="input">
+                <p id="split-hint" class="is-hidden mt-1 text-xs" style="color:var(--muted)"></p>
+            </div>
+
+            <div id="worth-wrap" class="is-hidden">
+                <label class="label">Was it worth it?</label>
+                <div class="worth-row">
+                    <button type="button" class="worth-btn" data-worth="worth"><span class="worth-pill">🙂</span>Worth it</button>
+                    <button type="button" class="worth-btn" data-worth="neutral"><span class="worth-pill">😐</span>Neutral</button>
+                    <button type="button" class="worth-btn" data-worth="regret"><span class="worth-pill">🙁</span>Regret</button>
+                </div>
+            </div>
+
+            <p id="form-error" class="is-hidden rounded-xl border border-rose-500/40 bg-rose-500/10 px-3 py-2 text-sm text-rose-200" role="alert"></p>
+
+            <div class="mt-1 grid grid-cols-3 gap-3">
+                <button id="btn-cancel-modal" type="button" class="btn-ghost">Cancel</button>
+                <button id="btn-save" type="button" class="btn-neon col-span-2"><span id="btn-save-label">Save subscription</span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================= LEGAL MODAL ================= -->
+<div id="legal-modal" class="modal fixed inset-0 z-[110] items-end justify-center md:items-center md:p-6" role="dialog" aria-modal="true" aria-labelledby="legal-title">
+    <div class="scrim absolute inset-0 bg-black/70 backdrop-blur-sm" data-close-legal></div>
+    <div class="sheet glass-strong relative max-h-[85vh] w-full overflow-y-auto rounded-t-[2rem] p-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] md:max-w-xl md:rounded-[2rem]">
+        <div class="mx-auto mb-4 h-1.5 w-12 rounded-full bg-white/20 md:hidden"></div>
+        <div class="mb-5 flex items-center justify-between gap-4">
+            <h2 id="legal-title" class="font-display text-xl font-bold">Privacy Policy</h2>
+            <button type="button" class="ibtn" aria-label="Close" data-close-legal><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="legal-body" class="legal-body"></div>
+    </div>
+</div>
+
+<!-- ================= CONTACT MODAL ================= -->
+<div id="contact-modal" class="modal fixed inset-0 z-[110] items-end justify-center md:items-center md:p-6" role="dialog" aria-modal="true" aria-labelledby="contact-title">
+    <div class="scrim absolute inset-0 bg-black/70 backdrop-blur-sm" data-close-contact></div>
+    <div class="sheet glass-strong relative max-h-[92vh] w-full overflow-y-auto rounded-t-[2rem] p-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] md:max-w-md md:rounded-[2rem]">
+        <div class="mx-auto mb-4 h-1.5 w-12 rounded-full bg-white/20 md:hidden"></div>
+        <div class="mb-5 flex items-center justify-between gap-4">
+            <h2 id="contact-title" class="font-display text-xl font-bold">Contact us</h2>
+            <button type="button" class="ibtn" aria-label="Close" data-close-contact><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="mb-4 flex items-center justify-between gap-3 rounded-2xl px-4 py-3 text-sm" style="background:var(--input-bg);border:1px solid var(--input-border)">
+            <a href="mailto:vroxit-io-devloper@outlook.com" class="truncate font-medium" style="color:#4facfe">vroxit-io-devloper@outlook.com</a>
+            <button id="btn-copy-email" type="button" class="ibtn" title="Copy email" aria-label="Copy support email"><i class="fa-regular fa-copy"></i></button>
+        </div>
+        <div class="grid gap-3">
+            <div><label class="label" for="c-name">Your name</label><input id="c-name" type="text" class="input" placeholder="Full name"></div>
+            <div><label class="label" for="c-email">Your email</label><input id="c-email" type="email" class="input" placeholder="you@example.com"></div>
+            <div>
+                <label class="label" for="c-subject">Subject</label>
+                <select id="c-subject" class="input"><option>Feedback</option><option>Bug report</option><option>Support</option><option>General</option></select>
+            </div>
+            <div><label class="label" for="c-message">Message</label><textarea id="c-message" rows="4" class="input" placeholder="How can we help?"></textarea></div>
+            <button id="btn-send-contact" type="button" class="btn-neon w-full"><i class="fa-regular fa-paper-plane"></i>Open in mail app</button>
+            <p class="text-center text-xs" style="color:var(--muted2)">This opens your email app with the message pre-filled &mdash; SubTrack AI Pro has no server to send it directly.</p>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc, onSnapshot, query, where, orderBy, deleteDoc, doc, getDoc, getDocs, updateDoc, setDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+    import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-storage.js";
+    import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-functions.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyB6w2nYCiCYj6kYpGGCsbFXy1wP0SGIhWY",
+        authDomain: "subtracker-ai-21624.firebaseapp.com",
+        projectId: "subtracker-ai-21624",
+        storageBucket: "subtracker-ai-21624.firebasestorage.app",
+        messagingSenderId: "245638353451",
+        appId: "1:245638353451:web:ff93b4828fea3c543c906e",
+        measurementId: "G-VS7LJ61YED"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+    const functions = getFunctions(app); // used once you deploy the /functions folder — see PAYMENTS notes below
+    const googleProvider = new GoogleAuthProvider();
+
+    /* ---------- Constants ---------- */
+    const RATE = 83; // approx 1 USD = 83 INR, used only to normalize prices into INR for storage
+    const MAX_BYTES = 10 * 1024 * 1024;
+    const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const SUPPORT_EMAIL = 'vroxit-io-devloper@outlook.com';
+
+    const CATS = {
+        'AI Tools':      { icon: 'fa-robot',    a: '#00f2fe', b: '#4facfe' },
+        'Entertainment': { icon: 'fa-film',     a: '#a18cd1', b: '#f472b6' },
+        'Productivity':  { icon: 'fa-briefcase', a: '#4facfe', b: '#a18cd1' },
+        'Health/Gym':    { icon: 'fa-dumbbell', a: '#34d399', b: '#00f2fe' },
+        'Other':         { icon: 'fa-cube',     a: '#94a3b8', b: '#64748b' }
+    };
+    const BRANDS = [
+        ['spotify', 'fa-spotify'], ['youtube', 'fa-youtube'], ['amazon', 'fa-amazon'], ['prime', 'fa-amazon'],
+        ['apple', 'fa-apple'], ['icloud', 'fa-apple'], ['google', 'fa-google'], ['microsoft', 'fa-microsoft'],
+        ['adobe', 'fa-adobe'], ['dropbox', 'fa-dropbox'], ['github', 'fa-github'], ['slack', 'fa-slack'],
+        ['figma', 'fa-figma'], ['discord', 'fa-discord'], ['twitch', 'fa-twitch'], ['linkedin', 'fa-linkedin'],
+        ['playstation', 'fa-playstation'], ['xbox', 'fa-xbox'], ['steam', 'fa-steam']
+    ];
+    // 1-click cancel guides for common services (best-effort public links)
+    const CANCEL_LINKS = {
+        netflix: 'https://www.netflix.com/cancelplan', spotify: 'https://www.spotify.com/account/subscription/',
+        amazon: 'https://www.amazon.in/mc/pipelines/cancellation', prime: 'https://www.amazon.in/mc/pipelines/cancellation',
+        youtube: 'https://www.youtube.com/paid_memberships', apple: 'https://support.apple.com/en-us/HT202039',
+        icloud: 'https://support.apple.com/en-us/HT202039', google: 'https://myaccount.google.com/subscriptions',
+        'one drive': 'https://account.microsoft.com/services', microsoft: 'https://account.microsoft.com/services',
+        adobe: 'https://helpx.adobe.com/manage-account/using/cancel-subscription.html',
+        disney: 'https://www.disneyplus.com/account/subscription', hotstar: 'https://www.hotstar.com/in/subscription',
+        chatgpt: 'https://help.openai.com/en/articles/6825453-chatgpt-subscription', openai: 'https://help.openai.com/en/articles/6825453-chatgpt-subscription',
+        notion: 'https://www.notion.so/my-integrations', canva: 'https://www.canva.com/help/cancel-subscription/'
+    };
+    // Cheaper/free alternatives worth a nudge (best-effort, editable list — not a live AI call)
+    const ALT_TIPS = [
+        { match: 'chatgpt plus', text: 'Claude and Gemini both have solid free tiers that cover most everyday tasks.' },
+        { match: 'midjourney', text: 'Leonardo AI\u2019s free tier gives daily credits at a similar quality for casual use.' },
+        { match: 'copy.ai', text: 'A custom GPT inside ChatGPT Plus can often replace a dedicated copywriting tool.' },
+        { match: 'jasper', text: 'A custom GPT inside ChatGPT Plus can often replace a dedicated copywriting tool.' },
+        { match: 'grammarly', text: 'Most word processors now include a free built-in grammar checker.' }
+    ];
+    // Smart categorization: keyword -> category, checked against the typed name (first match wins)
+    const CATEGORY_KEYWORDS = [
+        ['chatgpt', 'AI Tools'], ['claude', 'AI Tools'], ['gemini', 'AI Tools'], ['midjourney', 'AI Tools'], ['copy.ai', 'AI Tools'], ['jasper', 'AI Tools'], ['notion ai', 'AI Tools'],
+        ['netflix', 'Entertainment'], ['prime video', 'Entertainment'], ['hotstar', 'Entertainment'], ['disney', 'Entertainment'], ['spotify', 'Entertainment'], ['youtube', 'Entertainment'], ['sony liv', 'Entertainment'], ['zee5', 'Entertainment'],
+        ['notion', 'Productivity'], ['dropbox', 'Productivity'], ['google one', 'Productivity'], ['icloud', 'Productivity'], ['microsoft 365', 'Productivity'], ['office 365', 'Productivity'], ['slack', 'Productivity'], ['zoom', 'Productivity'], ['canva', 'Productivity'], ['adobe', 'Productivity'], ['github', 'Productivity'], ['figma', 'Productivity'],
+        ['gym', 'Health/Gym'], ['fitness', 'Health/Gym'], ['cult', 'Health/Gym'], ['yoga', 'Health/Gym']
+    ];
+    function guessCategory(name) {
+        const n = String(name || '').toLowerCase();
+        const hit = CATEGORY_KEYWORDS.find(([k]) => n.includes(k));
+        return hit ? hit[1] : null;
+    }
+
+    /* ---------- Premium launch config ----------
+       Prepaid-only passes, no AutoPay (per the PRD): Payment -> Pass -> Redeem -> Unlock -> Expiry -> Free.
+
+       Earlier draft of this file used three static Razorpay Payment Links. That doesn't actually work for
+       automatic unlock: a static link has no way to carry your Firebase UID through to the webhook, so
+       Razorpay would have no idea which account to mark isPro:true for. The correct flow (implemented here)
+       is: this page calls the createRazorpayOrder Cloud Function (in the /functions folder) → that function
+       creates a Razorpay Order server-side with your UID in its notes → Razorpay Checkout opens for that
+       order → Razorpay's webhook (also in /functions) verifies the payment and, because the UID travelled
+       with the order, writes isPro straight onto YOUR users/{uid} document.
+
+       PREMIUM_LIVE is false until you deploy the /functions folder (see functions/README.txt). Until then,
+       every plan card shows "Coming Soon" and clicking it just shows a toast. Flip PREMIUM_LIVE to true
+       once functions are deployed and a Razorpay key is configured — nothing else here needs to change. */
+    const PREMIUM_LIVE = false;
+    const PLAN_PRICES = { plus: 49, pro: 99, max: 199 }; // display only — the Cloud Function re-checks the real price
+    const VIP_CODE = 'VROXPRO-99';
+
+    let user = null;
+    let subs = [];
+    let budget = 0;
+    let isPro = false;
+    let familyId = null, unsubFamily = null, unsubFamilySubs = null, familyMembers = [], familySubs = [];
+    let worthSelection = null; // 'worth' | 'neutral' | 'regret' | null, for the subscription being added/edited
+    let categoryTouched = false; // true once the person manually picks a category in the open modal
+    let loaded = false, budgetLoaded = false, loadError = false;
+    let unsub = null, unsubBudget = null;
+    let filter = 'all', search = '', view = 'overview', authMode = 'login', saving = false;
+    let donut = null, bars = null;
+    let currency = 'INR';
+    let calY, calM;
+    { const n = new Date(); calY = n.getFullYear(); calM = n.getMonth(); }
+    try { if (localStorage.getItem('subtrack-currency') === 'USD') currency = 'USD'; } catch (e) {}
+    try { document.documentElement.dataset.theme = localStorage.getItem('subtrack-theme') === 'light' ? 'light' : 'dark'; } catch (e) { document.documentElement.dataset.theme = 'dark'; }
+
+    const $ = (id) => document.getElementById(id);
+    const show = (el, on = true) => el.classList.toggle('is-hidden', !on);
+
+    /* ---------- Utilities ---------- */
+    function esc(str) { return String(str ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+    function fmt(v) {
+        if (currency === 'USD') return '$' + (v / RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        const frac = Math.abs(v - Math.round(v)) > 0.005 ? 2 : 0;
+        return '₹' + v.toLocaleString('en-IN', { minimumFractionDigits: frac, maximumFractionDigits: frac });
+    }
+    const parseDate = (s) => { const [y, m, d] = String(s).split('-').map(Number); return new Date(y, (m || 1) - 1, d || 1); };
+    const startOfToday = () => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); };
+    const daysUntil = (s) => Math.round((parseDate(s) - startOfToday()) / 86400000);
+    const toISO = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    function addMonths(d, n) {
+        const day = d.getDate();
+        const r = new Date(d.getFullYear(), d.getMonth() + n, 1);
+        r.setDate(Math.min(day, new Date(r.getFullYear(), r.getMonth() + 1, 0).getDate()));
+        return r;
+    }
+    function fmtDate(s) {
+        const d = parseDate(s);
+        const opts = { day: 'numeric', month: 'short' };
+        if (d.getFullYear() !== new Date().getFullYear()) opts.year = 'numeric';
+        return d.toLocaleDateString(undefined, opts);
+    }
+    const isActive = (s) => s.status !== 'cancelled';
+    const shareOf = (s) => s.price / (s.splitCount && s.splitCount > 0 ? s.splitCount : 1); // what YOU actually pay
+    const monthlyEq = (s) => s.cycle === 'yearly' ? shareOf(s) / 12 : shareOf(s);
+    const yearlyEq = (s) => s.cycle === 'yearly' ? shareOf(s) : shareOf(s) * 12;
+
+    function iconFor(s) {
+        const n = String(s.name || '').toLowerCase();
+        const hit = BRANDS.find(([k]) => n.includes(k));
+        if (hit) return `fa-brands ${hit[1]}`;
+        return `fa-solid ${(CATS[s.category] || CATS.Other).icon}`;
+    }
+    function cancelLinkFor(s) {
+        const n = String(s.name || '').toLowerCase();
+        const hit = Object.keys(CANCEL_LINKS).find(k => n.includes(k));
+        return hit ? CANCEL_LINKS[hit] : null;
+    }
+    function altTipFor(name) {
+        const n = String(name || '').toLowerCase();
+        const hit = ALT_TIPS.find(t => n.includes(t.match));
+        return hit ? hit.text : null;
+    }
+
+    function statusInfo(s) {
+        if (!isActive(s)) return { text: 'Cancelled', cls: 'b-gray', dot: false, sub: 'Billing stopped' };
+        const d = daysUntil(s.nextDate);
+        const when = fmtDate(s.nextDate);
+        if (s.isTrial && d >= 0 && d <= 3) return { text: d === 0 ? 'Trial ends today!' : `Trial ends in ${d}d!`, cls: 'b-red', dot: true, sub: `Charges ${when}` };
+        if (s.isTrial) return { text: 'Free trial', cls: 'b-violet', dot: false, sub: `Charges ${when}` };
+        if (d < 0) return { text: `Overdue by ${-d} day${-d === 1 ? '' : 's'}`, cls: 'b-red', dot: true, sub: when };
+        if (d === 0) return { text: 'Due today', cls: 'b-red', dot: true, sub: when };
+        if (d <= 3) return { text: `Due in ${d} day${d === 1 ? '' : 's'}`, cls: 'b-red', dot: true, sub: when };
+        if (d <= 7) return { text: `Due in ${d} days`, cls: 'b-amber', dot: false, sub: when };
+        return { text: 'Paid', cls: 'b-green', dot: false, sub: `Renews ${when}` };
+    }
+
+    function toast(msg, type = 'ok') {
+        const el = document.createElement('div');
+        el.className = 'toast ' + (type === 'err' ? 'toast-err' : 'toast-ok');
+        el.innerHTML = `<i class="fa-solid ${type === 'err' ? 'fa-circle-exclamation' : 'fa-circle-check'}"></i><span>${esc(msg)}</span>`;
+        $('toasts').appendChild(el);
+        setTimeout(() => { el.classList.add('out'); setTimeout(() => el.remove(), 320); }, 3600);
+    }
+    function errText(e) {
+        const map = {
+            'auth/invalid-credential': 'Incorrect email or password.', 'auth/wrong-password': 'Incorrect email or password.',
+            'auth/user-not-found': 'Incorrect email or password.', 'auth/email-already-in-use': 'That email already has an account. Try logging in.',
+            'auth/weak-password': 'Use a password with at least 6 characters.', 'auth/invalid-email': 'Enter a valid email address.',
+            'auth/missing-password': 'Enter your password.', 'auth/too-many-requests': 'Too many attempts. Try again in a few minutes.',
+            'auth/network-request-failed': 'Network error. Check your connection.', 'auth/unauthorized-domain': 'This domain is not authorised in Firebase Authentication settings.',
+            'storage/unauthorized': 'Storage rules blocked this upload. Check your Firebase Storage rules.', 'permission-denied': 'Firestore rules blocked this action. Check your Firestore rules.'
+        };
+        const code = (e && e.code) || '';
+        if (map[code]) return map[code];
+        return (e && e.message ? e.message.replace('Firebase: ', '').replace(/\s*\(auth\/[^)]+\)\.?/, '') : '') || 'Something went wrong. Try again.';
+    }
+
+    /* ---------- Theme ---------- */
+    function applyThemeUI() {
+        const light = document.documentElement.dataset.theme === 'light';
+        $('theme-icon').className = 'fa-solid ' + (light ? 'fa-sun' : 'fa-moon');
+        $('theme-label-2').textContent = light ? 'Light' : 'Dark';
+        $('theme-toggle-meta') && 0;
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', light ? '#eef1f8' : '#0b0f19');
+    }
+    function toggleTheme() {
+        const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+        document.documentElement.dataset.theme = next;
+        try { localStorage.setItem('subtrack-theme', next); } catch (e) {}
+        applyThemeUI();
+    }
+    $('btn-theme').onclick = toggleTheme;
+    $('btn-theme-2').onclick = toggleTheme;
+    applyThemeUI();
+
+    /* ---------- Authentication ---------- */
+    function authError(msg) { const el = $('auth-error'); el.textContent = msg || ''; show(el, !!msg); }
+    function setAuthBusy(busy) {
+        $('btn-auth-submit').disabled = busy; $('btn-google').disabled = busy;
+        $('btn-auth-submit').innerHTML = busy ? '<i class="fa-solid fa-spinner spin"></i>Please wait' : (authMode === 'signup' ? 'Create account' : 'Log in');
+    }
+    function setAuthMode(mode) {
+        authMode = mode;
+        const signup = mode === 'signup';
+        $('tab-login').classList.toggle('on', !signup); $('tab-signup').classList.toggle('on', signup);
+        $('tab-login').setAttribute('aria-selected', String(!signup)); $('tab-signup').setAttribute('aria-selected', String(signup));
+        $('auth-heading').textContent = signup ? 'Create your account' : 'Welcome back';
+        $('auth-sub').textContent = signup ? 'Start tracking your subscriptions in minutes.' : 'Log in to see your dashboard.';
+        $('btn-auth-submit').textContent = signup ? 'Create account' : 'Log in';
+        $('auth-pass').setAttribute('autocomplete', signup ? 'new-password' : 'current-password');
+        show($('btn-forgot').parentElement, !signup);
+        authError('');
+    }
+    $('tab-login').onclick = () => setAuthMode('login');
+    $('tab-signup').onclick = () => setAuthMode('signup');
+    $('btn-eye').onclick = () => {
+        const input = $('auth-pass'); const reveal = input.type === 'password';
+        input.type = reveal ? 'text' : 'password';
+        $('btn-eye').innerHTML = `<i class="fa-regular ${reveal ? 'fa-eye-slash' : 'fa-eye'}"></i>`;
+        $('btn-eye').setAttribute('aria-label', reveal ? 'Hide password' : 'Show password');
+    };
+    $('auth-form').addEventListener('submit', async (ev) => {
+        ev.preventDefault(); authError('');
+        const email = $('auth-email').value.trim(); const pass = $('auth-pass').value;
+        if (!email || !pass) { authError('Enter your email and password.'); return; }
+        setAuthBusy(true);
+        try { if (authMode === 'signup') await createUserWithEmailAndPassword(auth, email, pass); else await signInWithEmailAndPassword(auth, email, pass); }
+        catch (e) { authError(errText(e)); } finally { setAuthBusy(false); }
+    });
+    $('btn-google').onclick = async () => {
+        authError(''); setAuthBusy(true);
+        try { await signInWithPopup(auth, googleProvider); }
+        catch (e) {
+            if (e.code === 'auth/popup-blocked') { try { await signInWithRedirect(auth, googleProvider); return; } catch (e2) { authError(errText(e2)); } }
+            else if (e.code !== 'auth/popup-closed-by-user' && e.code !== 'auth/cancelled-popup-request') { authError(errText(e)); }
+        } finally { setAuthBusy(false); }
+    };
+    $('btn-forgot').onclick = async () => {
+        const email = $('auth-email').value.trim();
+        if (!email) { authError('Enter your email above, then tap "Forgot password?".'); return; }
+        try { await sendPasswordResetEmail(auth, email); authError(''); toast('If that email has an account, a reset link is on its way.'); }
+        catch (e) { authError(errText(e)); }
+    };
+    const logout = () => signOut(auth);
+    $('btn-logout-top').onclick = logout;
+    $('btn-logout-acct').onclick = logout;
+
+    function renderAvatar(el, u) {
+        const letter = ((u.displayName || u.email || '?').trim()[0] || '?').toUpperCase();
+        if (u.photoURL) el.innerHTML = `<img src="${esc(u.photoURL)}" alt="" referrerpolicy="no-referrer" class="h-full w-full object-cover">`;
+        else el.textContent = letter;
+    }
+
+    onAuthStateChanged(auth, (u) => {
+        $('boot').classList.add('is-hidden');
+        if (u) {
+            user = u;
+            show($('auth-screen'), false); show($('app-screen'), true);
+            $('app-screen').classList.add('flex');
+            renderAvatar($('avatar-top'), u); renderAvatar($('avatar-acct'), u);
+            $('acct-name').textContent = u.displayName || (u.email ? u.email.split('@')[0] : 'Account');
+            $('acct-email').textContent = u.email || '';
+            loaded = false; budgetLoaded = false; loadError = false; filter = 'all'; search = '';
+            $('search-input').value = ''; $('budget-input').value = '';
+            syncFilterTabs(); syncCurrencyLabels(); showSkeletons(); setView('overview');
+            subscribeSubs(); subscribeBudget();
+        } else {
+            user = null;
+            if (unsub) { unsub(); unsub = null; }
+            if (unsubBudget) { unsubBudget(); unsubBudget = null; }
+            if (unsubFamily) { unsubFamily(); unsubFamily = null; }
+            if (unsubFamilySubs) { unsubFamilySubs(); unsubFamilySubs = null; }
+            familyId = null; familyMembers = []; familySubs = [];
+            subs = []; budget = 0; loaded = false; budgetLoaded = false;
+            destroyCharts(); closeModal(true); closeLegal(); closeContact();
+            show($('app-screen'), false); $('app-screen').classList.remove('flex');
+            show($('auth-screen'), true);
+            $('auth-pass').value = ''; setAuthBusy(false); setAuthMode('login');
+        }
+    });
+
+    /* ---------- Firestore sync ---------- */
+    function subscribeSubs() {
+        if (unsub) unsub();
+        const q = query(collection(db, 'users', user.uid, 'subscriptions'), orderBy('nextDate', 'asc'));
+        unsub = onSnapshot(q, (snap) => {
+            subs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            loaded = true; loadError = false; renderAll();
+        }, (err) => { console.error(err); loaded = true; loadError = true; subs = []; renderAll(); toast(errText(err), 'err'); });
+    }
+    function subscribeBudget() {
+        if (unsubBudget) unsubBudget();
+        unsubBudget = onSnapshot(doc(db, 'users', user.uid), (snap) => {
+            const data = snap.exists() ? snap.data() : {};
+            budget = data.monthlyBudget ? Number(data.monthlyBudget) : 0;
+            budgetLoaded = true;
+            if (!document.activeElement || document.activeElement.id !== 'budget-input') {
+                $('budget-input').value = budget > 0 ? (currency === 'USD' ? (budget / RATE).toFixed(2) : Math.round(budget)) : '';
+            }
+            isPro = !!data.isPro;
+            applyProUI();
+            handleFamilyId(data.familyId || null);
+            renderMetrics();
+        }, () => { budgetLoaded = true; });
+    }
+    $('btn-save-budget').onclick = async () => {
+        const raw = Number($('budget-input').value) || 0;
+        const inr = currency === 'USD' ? raw * RATE : raw;
+        try { await setDoc(doc(db, 'users', user.uid), { monthlyBudget: inr }, { merge: true }); toast('Budget saved'); }
+        catch (e) { toast(errText(e), 'err'); }
+    };
+
+    /* ---------- Premium: Coming Soon state, real checkout once deployed, VIP unlock for testing ---------- */
+    function applyLaunchState() {
+        document.querySelectorAll('.plan-card').forEach(card => {
+            const plan = card.dataset.plan;
+            const badge = card.querySelector('.coming-soon-badge');
+            const cta = card.querySelector('.plan-cta');
+            if (badge) show(badge, !PREMIUM_LIVE);
+            if (cta) cta.textContent = PREMIUM_LIVE ? cta.dataset.liveLabel : 'Launching Soon \ud83d\ude80';
+            card.onclick = () => {
+                if (PREMIUM_LIVE) { startCheckout(plan); return; }
+                toast('🔥 Vroxit Premium is coming soon! Have a VIP code? Apply it below.');
+            };
+        });
+    }
+    async function startCheckout(plan) {
+        if (typeof Razorpay === 'undefined') { toast('Payment page failed to load — check your connection and retry.', 'err'); return; }
+        try {
+            const createOrder = httpsCallable(functions, 'createRazorpayOrder');
+            const { data } = await createOrder({ plan });
+            const rzp = new Razorpay({
+                key: data.keyId,
+                order_id: data.orderId,
+                amount: data.amount,
+                currency: 'INR',
+                name: 'Vroxit Premium',
+                description: `${plan[0].toUpperCase()}${plan.slice(1)} pass — 30 days`,
+                prefill: { email: user.email || '' },
+                theme: { color: '#00f2fe' },
+                handler: () => toast('Payment received — activating your pass, this takes a few seconds…'),
+                modal: { ondismiss: () => toast('Checkout closed — no charge was made.') }
+            });
+            rzp.on('payment.failed', (resp) => toast('Payment failed: ' + (resp.error && resp.error.description || 'please try again'), 'err'));
+            rzp.open();
+        } catch (e) { toast(errText(e), 'err'); }
+    }
+    function applyProUI() {
+        show($('premium-locked'), !isPro);
+        $('vip-code').closest('.glass').classList.toggle('is-hidden', isPro);
+        show($('premium-unlocked'), isPro);
+    }
+    $('btn-apply-vip').onclick = async () => {
+        const code = $('vip-code').value.trim().toUpperCase();
+        show($('vip-error'), false);
+        if (code !== VIP_CODE) { show($('vip-error'), true); return; }
+        try {
+            await setDoc(doc(db, 'users', user.uid), { isPro: true, plan: 'pro', planUnlockedVia: 'vip-code', planUnlockedAt: Date.now(), planExpiresAt: null }, { merge: true });
+            toast('VIP code accepted — Pro unlocked for testing');
+        } catch (e) { toast(errText(e), 'err'); }
+    };
+
+    /* ---------- Family Dashboard ----------
+       families/{id} holds the roster; families/{id}/subscriptions holds the shared list. Anyone who
+       knows the join code can read family docs to find one by code (the code itself is the invitation,
+       same trust model as the VIP code) — see the firestore.rules note at the end of this file. */
+    function handleFamilyId(newId) {
+        if (newId === familyId) return;
+        familyId = newId;
+        if (unsubFamily) { unsubFamily(); unsubFamily = null; }
+        if (unsubFamilySubs) { unsubFamilySubs(); unsubFamilySubs = null; }
+        familyMembers = []; familySubs = [];
+        if (!familyId) { renderFamily(); return; }
+        unsubFamily = onSnapshot(doc(db, 'families', familyId), (snap) => {
+            familyMembers = snap.exists() ? (snap.data().memberEmails || []) : [];
+            $('family-code-display').textContent = snap.exists() ? (snap.data().code || '') : '';
+            renderFamily();
+        });
+        unsubFamilySubs = onSnapshot(collection(db, 'families', familyId, 'subscriptions'), (snap) => {
+            familySubs = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            renderFamily();
+        });
+    }
+    function renderFamily() {
+        show($('family-none'), !familyId);
+        show($('family-in'), !!familyId);
+        if (!familyId) return;
+        $('family-member-count').textContent = `${familyMembers.length} member${familyMembers.length === 1 ? '' : 's'}`;
+        const list = $('family-sub-list');
+        if (!familySubs.length) { list.innerHTML = '<p class="insight-empty">No shared subscriptions yet.</p>'; return; }
+        list.innerHTML = familySubs.map(s => `
+            <div class="flex items-center justify-between gap-3 rounded-xl px-4 py-3" style="background:var(--input-bg);border:1px solid var(--input-border)">
+                <div class="min-w-0"><p class="truncate font-medium">${esc(s.name)}</p><p class="text-xs" style="color:var(--muted)">Added by ${esc(s.addedByEmail || 'a member')}</p></div>
+                <div class="flex items-center gap-3"><span class="font-display font-semibold">${fmt(Number(s.price) || 0)}</span><button type="button" class="ibtn del" data-fam-del="${esc(s.id)}" aria-label="Remove ${esc(s.name)}"><i class="fa-solid fa-trash text-xs"></i></button></div>
+            </div>`).join('');
+    }
+    $('btn-family-create').onclick = async () => {
+        try {
+            const code = Math.random().toString(36).slice(2, 8).toUpperCase();
+            const famRef = doc(collection(db, 'families'));
+            await setDoc(famRef, { ownerUid: user.uid, code, memberUids: [user.uid], memberEmails: [user.email || 'member'], createdAt: Date.now() });
+            await setDoc(doc(db, 'users', user.uid), { familyId: famRef.id }, { merge: true });
+            toast('Family created — share the join code with others');
+        } catch (e) { toast(errText(e), 'err'); }
+    };
+    $('btn-family-join').onclick = async () => {
+        const code = $('family-code-input').value.trim().toUpperCase();
+        if (!code) return;
+        try {
+            const snap = await getDocs(query(collection(db, 'families'), where('code', '==', code)));
+            if (snap.empty) { toast('No family found with that code', 'err'); return; }
+            const famDoc = snap.docs[0];
+            await updateDoc(famDoc.ref, { memberUids: arrayUnion(user.uid), memberEmails: arrayUnion(user.email || 'member') });
+            await setDoc(doc(db, 'users', user.uid), { familyId: famDoc.id }, { merge: true });
+            $('family-code-input').value = '';
+            toast('Joined family');
+        } catch (e) { toast(errText(e), 'err'); }
+    };
+    $('btn-family-leave').onclick = async () => {
+        if (!confirm('Leave this family? Shared subscriptions stay visible to the remaining members.')) return;
+        try { await setDoc(doc(db, 'users', user.uid), { familyId: null }, { merge: true }); toast('Left family'); }
+        catch (e) { toast(errText(e), 'err'); }
+    };
+    $('btn-family-add-sub').onclick = async () => {
+        const name = $('fam-sub-name').value.trim();
+        const price = Number($('fam-sub-price').value);
+        if (!name || !(price > 0)) { toast('Enter a name and a price', 'err'); return; }
+        try {
+            await addDoc(collection(db, 'families', familyId, 'subscriptions'), { name, price, addedByUid: user.uid, addedByEmail: user.email || 'member', createdAt: Date.now() });
+            $('fam-sub-name').value = ''; $('fam-sub-price').value = '';
+        } catch (e) { toast(errText(e), 'err'); }
+    };
+    $('family-sub-list').addEventListener('click', async (e) => {
+        const btn = e.target.closest('[data-fam-del]'); if (!btn) return;
+        try { await deleteDoc(doc(db, 'families', familyId, 'subscriptions', btn.dataset.famDel)); } catch (e2) { toast(errText(e2), 'err'); }
+    });
+
+    /* ---------- Rendering ---------- */
+    function showSkeletons() {
+        const sk = (w, h) => `<span class="skel block ${w} ${h}"></span>`;
+        ['m-monthly', 'm-yearly', 'm-high'].forEach(id => { const el = $(id); cancelAnimationFrame(el._raf); delete el.dataset.v; el.innerHTML = sk('w-32', 'h-9'); });
+        ['m-monthly-cap', 'm-yearly-cap', 'm-high-cap'].forEach(id => { $(id).innerHTML = sk('w-40', 'h-4'); });
+        destroyCharts();
+        ['cat', 'bar'].forEach(k => { show($(k + '-skel'), true); show($(k + '-chart'), false); show($(k + '-empty'), false); });
+        $('sub-list').innerHTML = Array.from({ length: 6 }, () => `
+            <div class="glass rounded-3xl p-5">
+                <div class="flex items-center gap-4">
+                    <span class="skel h-12 w-12 !rounded-2xl"></span>
+                    <div class="flex-1 space-y-2"><span class="skel block h-4 w-3/5"></span><span class="skel block h-3 w-2/5"></span></div>
+                    <span class="skel h-5 w-14"></span>
+                </div>
+                <div class="mt-5 flex justify-between"><span class="skel h-6 w-24 !rounded-full"></span><span class="skel h-4 w-16"></span></div>
+                <div class="mt-5 flex justify-between border-t pt-4" style="border-color:var(--divider)"><span class="skel h-9 w-28 !rounded-full"></span><span class="skel h-9 w-24 !rounded-full"></span></div>
+            </div>`).join('');
+        ['cnt-all', 'cnt-active', 'cnt-cancelled'].forEach(id => { $(id).textContent = '-'; });
+        $('cal-days').innerHTML = Array.from({ length: 35 }, () => '<span class="skel !rounded-xl"></span>').join('');
+    }
+
+    function renderAll() { renderMetrics(); renderCharts(); renderSubs(); renderCalendar(); renderCoach(); }
+
+    /* ---------- AI Spending Coach: duplicate detection + cleanup suggestions, from your own data only ---------- */
+    function findDuplicates(active) {
+        const flags = [];
+        const seen = [];
+        active.forEach(s => {
+            const nameKey = String(s.name).toLowerCase().replace(/[^a-z0-9]/g, '');
+            seen.forEach(o => {
+                if (o.id === s.id) return;
+                const sameCategory = o.category === s.category;
+                const similarName = nameKey && o.nameKey && (nameKey.includes(o.nameKey) || o.nameKey.includes(nameKey));
+                if (similarName || (sameCategory && s.category !== 'Other')) {
+                    const key = [s.id, o.id].sort().join('-');
+                    if (!flags.some(f => f.key === key)) flags.push({ key, a: s.name, b: o.name, reason: similarName ? 'similar names' : `both tagged ${s.category}` });
+                }
+            });
+            seen.push({ id: s.id, nameKey, category: s.category });
+        });
+        return flags;
+    }
+    function renderCoach() {
+        if (!loaded) return;
+        const active = subs.filter(isActive);
+        const rows = [];
+
+        const monthly = active.reduce((t, s) => t + monthlyEq(s), 0);
+        if (active.length) rows.push({ icon: 'fa-chart-line', text: `At this rate you're on track for about ${fmt(monthly * 3)} over the next 3 months.` });
+
+        findDuplicates(active).slice(0, 3).forEach(f => rows.push({ icon: 'fa-clone', text: `${esc(f.a)} and ${esc(f.b)} look like they might overlap (${f.reason}) &mdash; worth comparing?` }));
+
+        active.filter(s => s.priceIncreasedFrom).slice(0, 3).forEach(s => rows.push({ icon: 'fa-arrow-trend-up', text: `${esc(s.name)}'s price went up from ${fmt(s.priceIncreasedFrom)} to ${fmt(s.price)}.` }));
+
+        active.filter(s => s.worthIt === 'regret').slice(0, 3).forEach(s => rows.push({ icon: 'fa-broom', text: `You marked ${esc(s.name)} as regret &mdash; still worth keeping?` }));
+
+        $('coach-body').innerHTML = rows.length
+            ? rows.slice(0, 6).map(r => `<div class="insight-row"><i class="fa-solid ${r.icon}"></i><span>${r.text}</span></div>`).join('')
+            : '<p class="insight-empty">Nothing to flag right now &mdash; looking healthy.</p>';
+    }
+
+    function setMetric(id, value) {
+        const el = $(id); cancelAnimationFrame(el._raf);
+        const has = el.dataset.v !== undefined; const prev = has ? parseFloat(el.dataset.v) : 0;
+        el.dataset.v = value;
+        if (REDUCED || prev === value) { el.textContent = fmt(value); return; }
+        const t0 = performance.now(), dur = 650;
+        const step = (t) => {
+            const p = Math.min(1, (t - t0) / dur); const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = fmt(prev + (value - prev) * eased);
+            if (p < 1) el._raf = requestAnimationFrame(step);
+        };
+        el._raf = requestAnimationFrame(step);
+    }
+
+    function renderMetrics() {
+        if (!loaded) return;
+        const active = subs.filter(isActive);
+        const monthly = active.reduce((t, s) => t + monthlyEq(s), 0);
+        const yearly = active.reduce((t, s) => t + yearlyEq(s), 0);
+        setMetric('m-monthly', monthly); setMetric('m-yearly', yearly);
+        const splitNote = active.some(s => s.splitCount > 1) ? ' · split plans counted at your share' : '';
+        $('m-monthly-cap').textContent = `${active.length} active subscription${active.length === 1 ? '' : 's'}${splitNote}`;
+        $('m-yearly-cap').textContent = 'Projected over the next 12 months';
+
+        if (active.length) {
+            const top = active.reduce((a, b) => monthlyEq(b) > monthlyEq(a) ? b : a);
+            setMetric('m-high', monthlyEq(top));
+            $('m-high-cap').textContent = `${top.name} per month${top.cycle === 'yearly' ? ' (billed yearly)' : ''}`;
+        } else {
+            const el = $('m-high'); cancelAnimationFrame(el._raf); delete el.dataset.v; el.textContent = '-';
+            $('m-high-cap').textContent = 'No active subscriptions yet';
+        }
+
+        // Trial protector banner
+        const trials = active.filter(s => s.isTrial && daysUntil(s.nextDate) >= 0 && daysUntil(s.nextDate) <= 3);
+        if (trials.length) {
+            const names = trials.map(s => `${s.name} (${daysUntil(s.nextDate) === 0 ? 'today' : 'in ' + daysUntil(s.nextDate) + 'd'})`).join(', ');
+            $('trial-warning-text').textContent = `${trials.length} free trial${trials.length === 1 ? '' : 's'} about to charge you: ${names}. Cancel now if you don't need ${trials.length === 1 ? 'it' : 'them'}.`;
+            show($('trial-warning'), true); $('trial-warning').style.display = 'flex';
+        } else { show($('trial-warning'), false); $('trial-warning').style.display = 'none'; }
+
+        // Budget warning
+        if (budgetLoaded && budget > 0) {
+            const pct = Math.min(999, Math.round((monthly / budget) * 100));
+            show($('budget-bar-wrap'), true);
+            $('budget-bar').style.width = Math.min(100, pct) + '%';
+            $('budget-bar-pct').textContent = pct + '%';
+            $('budget-bar-text').textContent = `${fmt(monthly)} of ${fmt(budget)} monthly budget`;
+            $('budget-bar').style.background = pct > 100 ? 'linear-gradient(90deg,#fb7185,#f43f5e)' : 'linear-gradient(90deg,#00f2fe,#4facfe,#a18cd1)';
+            if (monthly > budget) {
+                $('budget-warning-text').textContent = `You're ${fmt(monthly - budget)} over your ${fmt(budget)} monthly budget.`;
+                show($('budget-warning'), true); $('budget-warning').style.display = 'flex';
+            } else { show($('budget-warning'), false); $('budget-warning').style.display = 'none'; }
+        } else {
+            show($('budget-bar-wrap'), false); show($('budget-warning'), false); $('budget-warning').style.display = 'none';
+        }
+    }
+
+    /* Charts */
+    const centerPlugin = {
+        id: 'centerText',
+        afterDraw(chart) {
+            const { ctx, chartArea } = chart; if (!chartArea) return;
+            const cx = (chartArea.left + chartArea.right) / 2, cy = (chartArea.top + chartArea.bottom) / 2;
+            const total = chart.$total || 0;
+            const light = document.documentElement.dataset.theme === 'light';
+            ctx.save(); ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+            ctx.fillStyle = light ? '#101527' : '#ffffff'; ctx.font = "700 22px Sora, sans-serif";
+            ctx.fillText(fmt(total), cx, cy - 8);
+            ctx.fillStyle = '#94a3b8'; ctx.font = "500 12px Inter, sans-serif";
+            ctx.fillText('per month', cx, cy + 16); ctx.restore();
+        }
+    };
+    function destroyCharts() { if (donut) { donut.destroy(); donut = null; } if (bars) { bars.destroy(); bars = null; } }
+
+    function renewalBuckets(active) {
+        const now = new Date(); const start = new Date(now.getFullYear(), now.getMonth(), 1); const end = new Date(now.getFullYear(), now.getMonth() + 6, 1);
+        const labels = []; const totals = new Array(6).fill(0);
+        for (let i = 0; i < 6; i++) labels.push(new Date(now.getFullYear(), now.getMonth() + i, 1).toLocaleDateString(undefined, { month: 'short', year: '2-digit' }));
+        active.forEach(s => {
+            const base = parseDate(s.nextDate); if (isNaN(base)) return;
+            const step = s.cycle === 'yearly' ? 12 : 1;
+            for (let k = 0; k < 400; k++) {
+                const d = addMonths(base, k * step);
+                if (d >= end) break; if (d < start) continue;
+                const idx = (d.getFullYear() - start.getFullYear()) * 12 + d.getMonth() - start.getMonth();
+                totals[idx] += shareOf(s);
+            }
+        });
+        return { labels, totals };
+    }
+
+    function renderCharts() {
+        if (!loaded || typeof Chart === 'undefined') return;
+        Chart.defaults.color = '#94a3b8'; Chart.defaults.font.family = "'Inter', system-ui, sans-serif";
+        const active = subs.filter(isActive);
+        show($('cat-skel'), false); show($('bar-skel'), false);
+
+        const sums = {}; active.forEach(s => { sums[s.category] = (sums[s.category] || 0) + monthlyEq(s); });
+        const labels = Object.keys(sums); const values = Object.values(sums); const total = values.reduce((a, b) => a + b, 0);
+        const hasCat = labels.length > 0; show($('cat-chart'), hasCat); show($('cat-empty'), !hasCat);
+        if (hasCat) {
+            const colors = labels.map(l => (CATS[l] || CATS.Other).a);
+            if (!donut) {
+                donut = new Chart($('cat-chart'), {
+                    type: 'doughnut',
+                    data: { labels, datasets: [{ data: values, backgroundColor: colors, borderColor: getComputedStyle(document.body).backgroundColor, borderWidth: 4, borderRadius: 8, hoverOffset: 10 }] },
+                    options: { maintainAspectRatio: false, cutout: '72%', plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle', boxWidth: 8, padding: 16, color: '#94a3b8' } }, tooltip: { callbacks: { label: (c) => ` ${c.label}: ${fmt(c.parsed)} / month` } } } },
+                    plugins: [centerPlugin]
+                });
+            } else { donut.data.labels = labels; donut.data.datasets[0].data = values; donut.data.datasets[0].backgroundColor = colors; }
+            donut.$total = total; donut.update();
+        } else if (donut) { donut.destroy(); donut = null; }
+
+        const { labels: bl, totals } = renewalBuckets(active);
+        const hasBar = totals.some(v => v > 0); show($('bar-chart'), hasBar); show($('bar-empty'), !hasBar);
+        if (hasBar) {
+            if (!bars) {
+                bars = new Chart($('bar-chart'), {
+                    type: 'bar',
+                    data: { labels: bl, datasets: [{ label: 'Renewals', data: totals, borderRadius: 10, borderSkipped: false, maxBarThickness: 42, backgroundColor: (ctx) => { const { chart } = ctx; const area = chart.chartArea; if (!area) return '#4facfe'; const g = chart.ctx.createLinearGradient(0, area.bottom, 0, area.top); g.addColorStop(0, 'rgba(161,140,209,.55)'); g.addColorStop(1, 'rgba(0,242,254,.95)'); return g; } }] },
+                    options: { maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: (c) => ` ${fmt(c.parsed.y)} due` } } }, scales: { x: { grid: { display: false }, border: { display: false }, ticks: { color: '#94a3b8' } }, y: { beginAtZero: true, border: { display: false }, grid: { color: 'rgba(148,163,184,.15)' }, ticks: { color: '#94a3b8', maxTicksLimit: 5, callback: (v) => fmt(v) } } } }
+                });
+            } else { bars.data.labels = bl; bars.data.datasets[0].data = totals; bars.update(); }
+        } else if (bars) { bars.destroy(); bars = null; }
+    }
+
+    /* Calendar */
+    function occurrencesInMonth(sub, y, m) {
+        const base = parseDate(sub.nextDate); if (isNaN(base)) return [];
+        const step = sub.cycle === 'yearly' ? 12 : 1;
+        const rangeStart = new Date(y, m, 1), rangeEnd = new Date(y, m + 1, 1);
+        const monthsDiff = (y - base.getFullYear()) * 12 + (m - base.getMonth());
+        let n = Math.floor(monthsDiff / step); if (n < 0) n = 0;
+        const res = [];
+        for (let k = Math.max(0, n - 1); k <= n + 1; k++) {
+            const d = addMonths(base, k * step);
+            if (d >= rangeStart && d < rangeEnd) res.push(d.getDate());
+        }
+        return res;
+    }
+    function renderCalendar() {
+        if (!loaded) return;
+        const active = subs.filter(isActive);
+        $('cal-month-label').textContent = new Date(calY, calM, 1).toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+        const now = new Date();
+        $('cal-prev').disabled = (calY === now.getFullYear() && calM === now.getMonth());
+        $('cal-prev').style.opacity = $('cal-prev').disabled ? .35 : 1;
+        $('cal-prev').style.cursor = $('cal-prev').disabled ? 'not-allowed' : 'pointer';
+
+        const dayMap = {}; // day -> [names]
+        active.forEach(s => { occurrencesInMonth(s, calY, calM).forEach(d => { (dayMap[d] = dayMap[d] || []).push(s.name); }); });
+
+        const firstDow = new Date(calY, calM, 1).getDay();
+        const totalDays = new Date(calY, calM + 1, 0).getDate();
+        const todayISO = toISO(startOfToday());
+        let html = '';
+        for (let i = 0; i < firstDow; i++) html += '<span></span>';
+        for (let d = 1; d <= totalDays; d++) {
+            const iso = toISO(new Date(calY, calM, d));
+            const due = dayMap[d];
+            const isToday = iso === todayISO;
+            const title = due ? `${due.length} due: ${due.join(', ')}` : '';
+            html += `<span class="cal-cell${isToday ? ' today' : ''}${due ? ' has-due' : ''}" ${title ? `title="${esc(title)}"` : ''}>${d}${due ? `<span class="cdots">${due.slice(0, 3).map(() => '<span></span>').join('')}</span>` : ''}</span>`;
+        }
+        $('cal-days').innerHTML = html;
+    }
+    $('cal-prev').onclick = () => { if ($('cal-prev').disabled) return; calM--; if (calM < 0) { calM = 11; calY--; } renderCalendar(); };
+    $('cal-next').onclick = () => { calM++; if (calM > 11) { calM = 0; calY++; } renderCalendar(); };
+
+    /* Subscription list */
+    const WORTH_EMOJI = { worth: '🙂', neutral: '😐', regret: '🙁' };
+    function syncFilterTabs() {
+        document.querySelectorAll('[data-filter]').forEach(b => { const on = b.dataset.filter === filter; b.classList.toggle('on', on); b.setAttribute('aria-selected', String(on)); });
+    }
+    function cardHTML(s) {
+        const cat = CATS[s.category] || CATS.Other;
+        const st = statusInfo(s);
+        const cancelled = !isActive(s);
+        const showRenew = !cancelled && daysUntil(s.nextDate) <= 7;
+        const id = esc(s.id);
+        const invoice = s.invoiceUrl ? `<a class="link-chip invoice-btn" href="${esc(s.invoiceUrl)}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i>Invoice</a>` : '<span class="text-xs" style="color:var(--muted2)">No invoice</span>';
+        const cLink = cancelLinkFor(s);
+        const cancelChip = (cLink && !cancelled) ? `<a class="link-chip cancel-btn" href="${esc(cLink)}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i>Cancel guide</a>` : '';
+        const splitLine = s.splitCount > 1 ? `<div class="mt-3 flex items-center gap-2 text-xs" style="color:var(--muted)"><i class="fa-solid fa-users"></i>Split ${s.splitCount} ways &middot; your share ${fmt(shareOf(s))}</div>` : '';
+        const tip = altTipFor(s.name);
+        const tipLine = tip ? `<div class="mt-3 rounded-xl px-3 py-2 text-xs" style="background:rgba(0,242,254,.08);color:#7fd8ff;border:1px solid rgba(0,242,254,.25)"><i class="fa-solid fa-lightbulb mr-1"></i>${esc(tip)}</div>` : '';
+        return `
+        <article class="glass glass-hover rounded-3xl p-5 ${cancelled ? 'opacity-70' : ''}">
+            <div class="flex items-start gap-4">
+                <span class="tile" style="--a:${cat.a};--b:${cat.b}" aria-hidden="true"><i class="${iconFor(s)}"></i></span>
+                <div class="min-w-0 flex-1">
+                    <h3 class="truncate font-display text-lg font-semibold leading-tight">${esc(s.name)}</h3>
+                    <p class="mt-0.5 text-sm" style="color:var(--muted)">${esc(s.category)}</p>
+                </div>
+                <div class="text-right">
+                    <p class="font-display text-lg font-bold">${fmt(s.price)}</p>
+                    <p class="text-xs" style="color:var(--muted)">per ${s.cycle === 'yearly' ? 'year' : 'month'}</p>
+                    ${s.priceIncreasedFrom ? `<p class="price-up mt-0.5"><i class="fa-solid fa-arrow-trend-up"></i>was ${fmt(s.priceIncreasedFrom)}</p>` : ''}
+                    ${s.gstApplicable ? `<p class="text-[10px] mt-0.5" style="color:var(--muted2)">incl. GST: ${fmt(s.price / 1.18)} + ${fmt(s.price - s.price / 1.18)}</p>` : ''}
+                </div>
+            </div>
+            <div class="mt-4 flex items-center justify-between gap-3">
+                <span class="badge ${st.cls}">${st.dot ? '<span class="dot"></span>' : ''}${st.text}</span>
+                <span class="flex items-center gap-2 text-xs" style="color:var(--muted)">${WORTH_EMOJI[s.worthIt] || ''}${st.sub}</span>
+            </div>
+            ${splitLine}
+            ${tipLine}
+            <div class="mt-4 flex flex-wrap items-center justify-between gap-2 border-t pt-4" style="border-color:var(--divider)">
+                <div class="flex flex-wrap items-center gap-2">${invoice}${cancelChip}</div>
+                <div class="flex items-center gap-1.5">
+                    ${showRenew ? `<button type="button" class="ibtn renew" data-action="renew" data-id="${id}" title="Mark as renewed" aria-label="Mark ${esc(s.name)} as renewed"><i class="fa-solid fa-check"></i></button>` : ''}
+                    <button type="button" class="ibtn pause" data-action="toggle" data-id="${id}" title="${cancelled ? 'Reactivate' : 'Mark as cancelled'}" aria-label="${cancelled ? 'Reactivate' : 'Cancel'} ${esc(s.name)}"><i class="fa-solid ${cancelled ? 'fa-play' : 'fa-ban'}"></i></button>
+                    <button type="button" class="ibtn edit" data-action="edit" data-id="${id}" title="Edit" aria-label="Edit ${esc(s.name)}"><i class="fa-solid fa-pen"></i></button>
+                    <button type="button" class="ibtn del" data-action="delete" data-id="${id}" title="Delete" aria-label="Delete ${esc(s.name)}"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            </div>
+        </article>`;
+    }
+    function renderSubs() {
+        if (!loaded) return;
+        $('cnt-all').textContent = subs.length;
+        $('cnt-active').textContent = subs.filter(isActive).length;
+        $('cnt-cancelled').textContent = subs.filter(s => !isActive(s)).length;
+        const list = $('sub-list');
+        if (loadError) { list.innerHTML = `<div class="glass col-span-full rounded-3xl p-10 text-center"><i class="fa-solid fa-triangle-exclamation mb-3 text-3xl text-rose-300"></i><p class="font-display text-lg font-semibold">Could not load your subscriptions</p><p class="mt-1 text-sm" style="color:var(--muted)">Check your Firestore security rules and connection, then refresh.</p></div>`; return; }
+        if (subs.length === 0) { list.innerHTML = `<div class="glass col-span-full rounded-3xl p-10 text-center"><span class="tile mx-auto mb-4" style="--a:#00f2fe;--b:#a18cd1"><i class="fa-solid fa-layer-group"></i></span><p class="font-display text-xl font-semibold">No subscriptions yet</p><p class="mx-auto mt-1 max-w-sm text-sm" style="color:var(--muted)">Add your first one to see your monthly spend and upcoming renewals.</p><button type="button" class="btn-neon mt-6" data-action="add"><i class="fa-solid fa-plus"></i>Add subscription</button></div>`; return; }
+        const term = search.trim().toLowerCase();
+        const rows = subs.filter(s => { if (filter === 'active' && !isActive(s)) return false; if (filter === 'cancelled' && isActive(s)) return false; return !term || String(s.name).toLowerCase().includes(term); });
+        if (rows.length === 0) { list.innerHTML = `<div class="glass col-span-full rounded-3xl p-10 text-center"><i class="fa-solid fa-magnifying-glass mb-3 text-3xl" style="color:var(--muted)"></i><p class="font-display text-lg font-semibold">Nothing matches</p><p class="mt-1 text-sm" style="color:var(--muted)">Try a different search or filter.</p></div>`; return; }
+        list.innerHTML = rows.map(cardHTML).join('');
+    }
+
+    $('sub-list').addEventListener('click', async (e) => {
+        const btn = e.target.closest('[data-action]'); if (!btn) return;
+        const action = btn.dataset.action;
+        if (action === 'add') { openModal(); return; }
+        const s = subs.find(x => x.id === btn.dataset.id); if (!s) return;
+        const ref_ = doc(db, 'users', user.uid, 'subscriptions', s.id);
+        try {
+            if (action === 'edit') { openModal(s); }
+            else if (action === 'toggle') { const next = isActive(s) ? 'cancelled' : 'active'; await updateDoc(ref_, { status: next }); toast(next === 'cancelled' ? `${s.name} marked as cancelled` : `${s.name} reactivated`); }
+            else if (action === 'renew') {
+                const base = parseDate(s.nextDate); const step = s.cycle === 'yearly' ? 12 : 1; const today = startOfToday();
+                let k = 1; while (addMonths(base, k * step) < today && k < 400) k++;
+                await updateDoc(ref_, { nextDate: toISO(addMonths(base, k * step)) }); toast(`${s.name} renewed`);
+            } else if (action === 'delete') {
+                if (!confirm(`Delete "${s.name}"? This also removes its attached invoice.`)) return;
+                await deleteDoc(ref_);
+                if (s.invoicePath) { try { await deleteObject(ref(storage, s.invoicePath)); } catch (err) {} }
+                toast(`${s.name} deleted`);
+            }
+        } catch (err) { toast(errText(err), 'err'); }
+    });
+    document.querySelectorAll('[data-filter]').forEach(b => b.addEventListener('click', () => { filter = b.dataset.filter; syncFilterTabs(); renderSubs(); }));
+    $('search-input').addEventListener('input', (e) => { search = e.target.value; renderSubs(); });
+
+    /* CSV export */
+    function csvEscape(v) { const s = String(v ?? ''); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+    $('btn-export').onclick = () => {
+        if (!subs.length) { toast('No subscriptions to export', 'err'); return; }
+        const rows = [['Name', 'Category', 'Price (INR)', 'Cycle', 'Split Between', 'Your Share (INR)', 'Next Renewal', 'Status', 'Free Trial', 'Invoice URL']];
+        subs.forEach(s => rows.push([s.name, s.category, s.price, s.cycle, s.splitCount || 1, Math.round(shareOf(s) * 100) / 100, s.nextDate, isActive(s) ? 'Active' : 'Cancelled', s.isTrial ? 'Yes' : 'No', s.invoiceUrl || '']));
+        const csv = rows.map(r => r.map(csvEscape).join(',')).join('\r\n');
+        const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'subtrack-subscriptions.csv';
+        document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+        toast('CSV downloaded');
+    };
+
+    /* ---------- Navigation & currency ---------- */
+    function setView(v) {
+        view = v;
+        document.querySelectorAll('[data-panel]').forEach(p => p.classList.toggle('m-off', p.dataset.panel !== v));
+        document.querySelectorAll('[data-nav]').forEach(b => { const on = b.dataset.nav === v; b.classList.toggle('tab-on', on); if (on) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+        if (v === 'overview') requestAnimationFrame(() => { if (donut) donut.resize(); if (bars) bars.resize(); });
+        window.scrollTo({ top: 0 });
+    }
+    document.querySelectorAll('[data-nav]').forEach(b => b.addEventListener('click', () => setView(b.dataset.nav)));
+    document.querySelectorAll('[data-jump]').forEach(b => b.addEventListener('click', () => { $(b.dataset.jump).scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'start' }); }));
+
+    function syncCurrencyLabels() {
+        document.querySelectorAll('.cur-label').forEach(el => { el.textContent = currency === 'INR' ? '₹ INR' : '$ USD'; });
+        $('price-label').textContent = 'Price';
+        $('budget-cur-sign').textContent = currency === 'USD' ? '$' : '₹';
+        if (budgetLoaded) $('budget-input').value = budget > 0 ? (currency === 'USD' ? (budget / RATE).toFixed(2) : Math.round(budget)) : '';
+    }
+    function toggleCurrency() {
+        currency = currency === 'INR' ? 'USD' : 'INR';
+        try { localStorage.setItem('subtrack-currency', currency); } catch (e) {}
+        syncCurrencyLabels(); if (loaded) renderAll();
+    }
+    $('btn-currency').onclick = toggleCurrency;
+    $('btn-currency-2').onclick = toggleCurrency;
+    syncCurrencyLabels();
+
+    /* ---------- Modal: add / edit ---------- */
+    function formError(msg) { const el = $('form-error'); el.textContent = msg || ''; show(el, !!msg); }
+    function updateFileUI() {
+        const f = $('sub-invoice').files[0];
+        $('file-name').textContent = f ? f.name : 'Tap to attach a file';
+        show($('file-clear'), !!f);
+        show($('btn-ai-scan'), !!f);
+    }
+    function setProgress(pct) { $('upload-bar').style.width = pct + '%'; $('upload-pct').textContent = pct + '%'; }
+    function setSaving(on, text) {
+        saving = on; $('btn-save').disabled = on; $('btn-cancel-modal').disabled = on; $('sub-invoice').disabled = on;
+        $('btn-save-label').innerHTML = on ? `<i class="fa-solid fa-spinner spin mr-2"></i>${esc(text || 'Saving...')}` : 'Save subscription';
+        if (!on) show($('upload-wrap'), false);
+    }
+    function updateAltTip() {
+        const tip = altTipFor($('sub-name').value);
+        $('alt-tip-text').textContent = tip || '';
+        show($('alt-tip'), !!tip);
+    }
+    function updateSplitHint() {
+        const n = Math.max(1, Number($('sub-split').value) || 1);
+        const price = Number($('sub-price').value) || 0;
+        if (n > 1 && price > 0) { $('split-hint').textContent = `Your share: ${fmt(currency === 'USD' ? price * RATE / n : price / n)} per ${$('sub-cycle').value === 'yearly' ? 'year' : 'month'}`; show($('split-hint'), true); }
+        else show($('split-hint'), false);
+    }
+    $('sub-name').addEventListener('input', updateAltTip);
+    $('sub-split').addEventListener('input', updateSplitHint);
+    $('sub-price').addEventListener('input', updateSplitHint);
+    $('sub-cycle').addEventListener('change', updateSplitHint);
+
+    function setWorthUI(val) {
+        worthSelection = val;
+        document.querySelectorAll('.worth-btn').forEach(b => b.classList.toggle('on', b.dataset.worth === val));
+    }
+    function openModal(sub) {
+        formError(''); setSaving(false); setProgress(0);
+        $('sub-invoice').value = ''; updateFileUI();
+        show($('ai-scan-status'), false);
+        $('sub-currency').value = currency;
+        categoryTouched = false;
+        if (sub) {
+            $('modal-title').textContent = 'Edit subscription';
+            $('sub-id').value = sub.id;
+            $('sub-name').value = sub.name || '';
+            $('sub-price').value = sub.price;
+            $('sub-currency').value = 'INR';
+            $('sub-cycle').value = sub.cycle || 'monthly';
+            $('sub-category').value = CATS[sub.category] ? sub.category : 'Other';
+            $('sub-date').value = sub.nextDate || '';
+            $('sub-status').value = isActive(sub) ? 'active' : 'cancelled';
+            $('sub-trial').checked = !!sub.isTrial;
+            $('sub-gst').checked = !!sub.gstApplicable;
+            $('sub-split').value = sub.splitCount || 1;
+            show($('current-invoice'), !!sub.invoiceUrl);
+            show($('worth-wrap'), true);
+            setWorthUI(sub.worthIt || null);
+        } else {
+            $('modal-title').textContent = 'Add subscription';
+            $('sub-id').value = ''; $('sub-name').value = ''; $('sub-price').value = '';
+            $('sub-cycle').value = 'monthly'; $('sub-category').value = 'AI Tools';
+            $('sub-date').value = toISO(addMonths(startOfToday(), 1));
+            $('sub-status').value = 'active'; $('sub-trial').checked = false; $('sub-gst').checked = false; $('sub-split').value = 1;
+            show($('current-invoice'), false);
+            show($('worth-wrap'), false);
+            setWorthUI(null);
+        }
+        updateAltTip(); updateSplitHint();
+        $('modal').classList.add('open'); document.body.style.overflow = 'hidden';
+        setTimeout(() => $('sub-name').focus({ preventScroll: true }), 60);
+    }
+    document.querySelectorAll('.worth-btn').forEach(b => b.addEventListener('click', () => setWorthUI(worthSelection === b.dataset.worth ? null : b.dataset.worth)));
+    $('sub-category').addEventListener('change', () => { categoryTouched = true; });
+    $('sub-name').addEventListener('input', () => {
+        if (categoryTouched) return;
+        const guess = guessCategory($('sub-name').value);
+        if (guess) $('sub-category').value = guess;
+    });
+    function closeModal(force) {
+        if (saving && !force) return;
+        $('modal').classList.remove('open'); document.body.style.overflow = '';
+    }
+    $('btn-add-top').onclick = () => openModal();
+    $('fab-add').onclick = () => openModal();
+    $('btn-close-modal').onclick = () => closeModal();
+    $('btn-cancel-modal').onclick = () => closeModal();
+    $('modal').addEventListener('mousedown', (e) => { if (e.target === $('modal') || e.target.classList.contains('scrim')) closeModal(); });
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        if ($('modal').classList.contains('open')) closeModal();
+        if ($('legal-modal').classList.contains('open')) closeLegal();
+        if ($('contact-modal').classList.contains('open')) closeContact();
+    });
+
+    $('sub-invoice').addEventListener('change', () => {
+        const f = $('sub-invoice').files[0]; formError('');
+        if (f) {
+            const okType = f.type === 'application/pdf' || f.type.startsWith('image/');
+            if (!okType) { $('sub-invoice').value = ''; formError('Invoice must be a PDF or an image.'); }
+            else if (f.size > MAX_BYTES) { $('sub-invoice').value = ''; formError('That file is over 10 MB. Choose a smaller one.'); }
+        }
+        updateFileUI();
+    });
+    $('file-clear').addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); $('sub-invoice').value = ''; updateFileUI(); });
+
+    function uploadInvoice(file) {
+        return new Promise((resolve, reject) => {
+            const safe = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+            const path = `users/${user.uid}/invoices/${Date.now()}_${safe}`;
+            const task = uploadBytesResumable(ref(storage, path), file, { contentType: file.type || 'application/octet-stream' });
+            show($('upload-wrap'), true); setProgress(0);
+            task.on('state_changed', (snap) => setProgress(Math.round(snap.bytesTransferred / snap.totalBytes * 100)), reject,
+                async () => { try { resolve({ url: await getDownloadURL(task.snapshot.ref), path }); } catch (e) { reject(e); } });
+        });
+    }
+
+    $('btn-save').onclick = async () => {
+        if (saving) return;
+        formError('');
+        const id = $('sub-id').value;
+        const name = $('sub-name').value.trim();
+        const priceInput = Number($('sub-price').value);
+        const billedCcy = $('sub-currency').value;
+        const cycle = $('sub-cycle').value;
+        const category = $('sub-category').value;
+        const nextDate = $('sub-date').value;
+        const status = $('sub-status').value;
+        const isTrial = $('sub-trial').checked;
+        const gstApplicable = $('sub-gst').checked;
+        const splitCount = Math.max(1, Math.round(Number($('sub-split').value) || 1));
+        const file = $('sub-invoice').files[0];
+
+        if (!name) return formError('Enter the app name.');
+        if (!(priceInput > 0)) return formError('Enter a valid price.');
+        if (!nextDate) return formError('Pick the next renewal date.');
+
+        const price = Math.round((billedCcy === 'USD' ? priceInput * RATE : priceInput) * 100) / 100;
+        const data = { name, price, cycle, category, nextDate, status, isTrial, gstApplicable, splitCount };
+        const existing = id ? subs.find(s => s.id === id) : null;
+        if (id) data.worthIt = worthSelection; // null clears a previous rating
+        if (existing && price > existing.price) data.priceIncreasedFrom = existing.price;
+        else if (existing && existing.priceIncreasedFrom && price <= existing.priceIncreasedFrom) data.priceIncreasedFrom = null; // price came back down; clear the flag
+        let uploaded = null;
+
+        setSaving(true, file ? 'Uploading invoice...' : 'Saving...');
+        try {
+            if (file) {
+                uploaded = await uploadInvoice(file);
+                data.invoiceUrl = uploaded.url; data.invoicePath = uploaded.path; data.invoiceName = file.name;
+            }
+            $('btn-save-label').innerHTML = '<i class="fa-solid fa-spinner spin mr-2"></i>Saving...';
+            if (id) await updateDoc(doc(db, 'users', user.uid, 'subscriptions', id), data);
+            else await addDoc(collection(db, 'users', user.uid, 'subscriptions'), { ...data, createdAt: Date.now() });
+            if (uploaded && existing && existing.invoicePath) { try { await deleteObject(ref(storage, existing.invoicePath)); } catch (e) {} }
+            setSaving(false); closeModal();
+            toast(id ? 'Subscription updated' : 'Subscription added');
+        } catch (e) {
+            console.error(e);
+            if (uploaded) { try { await deleteObject(ref(storage, uploaded.path)); } catch (e2) {} }
+            setSaving(false); formError(errText(e));
+        }
+    };
+
+    /* ---------- AI receipt scanner (beta): client-side OCR/text extraction + regex fill ---------- */
+    let libsLoaded = false;
+    function loadScript(src) {
+        return new Promise((resolve, reject) => {
+            const s = document.createElement('script'); s.src = src; s.onload = resolve; s.onerror = () => reject(new Error('Failed to load ' + src));
+            document.head.appendChild(s);
+        });
+    }
+    async function ensureScanLibs() {
+        if (libsLoaded) return;
+        await Promise.all([
+            loadScript('https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js'),
+            loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js')
+        ]);
+        if (window.pdfjsLib) window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        libsLoaded = true;
+    }
+    async function extractText(file) {
+        if (file.type === 'application/pdf') {
+            const buf = await file.arrayBuffer();
+            const doc_ = await window.pdfjsLib.getDocument({ data: buf }).promise;
+            let text = '';
+            for (let p = 1; p <= Math.min(doc_.numPages, 3); p++) {
+                const page = await doc_.getPage(p);
+                const content = await page.getTextContent();
+                text += content.items.map(i => i.str).join(' ') + '\n';
+            }
+            return text;
+        }
+        const { data } = await window.Tesseract.recognize(file, 'eng');
+        return data.text || '';
+    }
+    const KNOWN_NAMES = ['ChatGPT Plus', 'ChatGPT', 'Claude', 'Netflix', 'Spotify', 'Amazon Prime', 'YouTube Premium', 'Adobe Creative Cloud', 'Adobe', 'Notion', 'Canva', 'Disney+', 'Hotstar', 'Microsoft 365', 'Google One', 'iCloud', 'Dropbox', 'GitHub', 'Figma', 'Slack', 'Midjourney'];
+    function parseReceiptText(text) {
+        const out = { name: null, price: null, ccy: 'INR', date: null };
+        const flat = text.replace(/\s+/g, ' ').trim();
+
+        const priced = flat.match(/(?:total|amount|paid|charged)[^\d₹$]{0,15}(₹|rs\.?|inr|\$)?\s?([\d,]+\.\d{2}|[\d,]+)/i)
+            || flat.match(/(₹|rs\.?|inr)\s?([\d,]+\.\d{2}|[\d,]+)/i)
+            || flat.match(/\$\s?([\d,]+\.\d{2}|[\d,]+)/);
+        if (priced) {
+            const numStr = priced[2] || priced[1];
+            const num = parseFloat(String(numStr).replace(/,/g, ''));
+            if (!isNaN(num)) { out.price = num; out.ccy = /\$/.test(priced[0]) && !/₹|rs|inr/i.test(priced[0]) ? 'USD' : 'INR'; }
+        }
+
+        const dPatterns = [/\b(\d{4}-\d{2}-\d{2})\b/, /\b(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{2,4})\b/, /\b([A-Za-z]{3,9}\s+\d{1,2},?\s+\d{4})\b/];
+        for (const re of dPatterns) {
+            const m = flat.match(re);
+            if (m) { const d = new Date(m[1]); if (!isNaN(d)) { out.date = toISO(d); break; } }
+        }
+
+        const lower = flat.toLowerCase();
+        const known = KNOWN_NAMES.find(n => lower.includes(n.toLowerCase()));
+        out.name = known || (flat.split(/[\n.]/)[0] || '').trim().slice(0, 40) || null;
+        return out;
+    }
+    $('btn-ai-scan').onclick = async () => {
+        const file = $('sub-invoice').files[0]; if (!file) return;
+        show($('ai-scan-status'), true); $('ai-scan-status-text').textContent = 'Loading AI scanner...'; $('btn-ai-scan').disabled = true;
+        try {
+            await ensureScanLibs();
+            $('ai-scan-status-text').textContent = 'Reading file...';
+            const text = await extractText(file);
+            const parsed = parseReceiptText(text);
+            let filled = [];
+            if (parsed.name) { $('sub-name').value = parsed.name; filled.push('name'); updateAltTip(); }
+            if (parsed.price) { $('sub-price').value = parsed.price; $('sub-currency').value = parsed.ccy; filled.push('price'); updateSplitHint(); }
+            if (parsed.date) { $('sub-date').value = parsed.date; filled.push('renewal date'); }
+            show($('ai-scan-status'), false); $('btn-ai-scan').disabled = false;
+            toast(filled.length ? `Auto-filled ${filled.join(', ')} — please review` : 'Could not detect details automatically. Please fill manually.', filled.length ? 'ok' : 'err');
+        } catch (e) {
+            console.error(e); show($('ai-scan-status'), false); $('btn-ai-scan').disabled = false;
+            toast('AI scan failed. Please fill the details manually.', 'err');
+        }
+    };
+
+    /* ---------- Legal & contact modals ---------- */
+    const LEGAL = {
+        privacy: { title: 'Privacy Policy', html: `
+            <h4>Data we collect</h4><p>We only store your login information (email and name, via Firebase Authentication) and the subscription details and receipts you choose to add, in secure Firebase storage tied to your account.</p>
+            <h4>No third-party sharing</h4><p>We do not sell or share your personal financial data with any third party.</p>
+            <h4>Cookies and local storage</h4><p>The app uses local storage and Firebase session cookies to keep you signed in and remember your preferences (like theme and currency).</p>
+            <h4>Contact</h4><p>For privacy concerns, email <a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a>.</p>` },
+        terms: { title: 'Terms & Conditions', html: `
+            <h4>Usage</h4><p>SubTrack AI Pro is a personal subscription-tracking tool, provided for individual, non-commercial use.</p>
+            <h4>Account responsibility</h4><p>You are responsible for keeping your account credentials secure.</p>
+            <h4>Service availability</h4><p>The app is provided on an as-is basis. Features may be updated or modified without prior notice.</p>` },
+        disclaimer: { title: 'Disclaimer', html: `
+            <p>SubTrack AI Pro is a tracking tool only. It does not automatically charge or deduct money from any bank account or card.</p>
+            <p>You are responsible for the accuracy of renewal dates and prices you enter.</p>
+            <p>AI suggestions and currency conversions are approximate and for reference only &mdash; always confirm with the official source before acting on them.</p>` },
+        about: { title: 'About Us', html: `
+            <h4>Our mission</h4><p>SubTrack AI Pro aims to help everyone manage their recurring subscriptions, monthly spend, and PDF invoices in one place.</p>
+            <h4>Built by</h4><p>Created and managed by Developer Sahil, Vroxit Developer Team.</p>
+            <h4>Support</h4><p>Email <a href="mailto:${SUPPORT_EMAIL}">${SUPPORT_EMAIL}</a>.</p>` }
+    };
+    function openLegal(key) {
+        const item = LEGAL[key]; if (!item) return;
+        $('legal-title').textContent = item.title; $('legal-body').innerHTML = item.html;
+        $('legal-modal').classList.add('open'); document.body.style.overflow = 'hidden';
+    }
+    function closeLegal() { $('legal-modal').classList.remove('open'); if (!$('modal').classList.contains('open') && !$('contact-modal').classList.contains('open')) document.body.style.overflow = ''; }
+    document.querySelectorAll('[data-legal]').forEach(b => b.addEventListener('click', () => openLegal(b.dataset.legal)));
+    document.querySelectorAll('[data-close-legal]').forEach(b => b.addEventListener('click', closeLegal));
+
+    function openContact() { $('contact-modal').classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeContact() { $('contact-modal').classList.remove('open'); if (!$('modal').classList.contains('open') && !$('legal-modal').classList.contains('open')) document.body.style.overflow = ''; }
+    $('btn-open-contact').onclick = openContact;
+    document.querySelectorAll('[data-close-contact]').forEach(b => b.addEventListener('click', closeContact));
+    $('btn-copy-email').onclick = async () => {
+        try { await navigator.clipboard.writeText(SUPPORT_EMAIL); toast('Email copied'); }
+        catch (e) {
+            try { const ta = document.createElement('textarea'); ta.value = SUPPORT_EMAIL; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); toast('Email copied'); }
+            catch (e2) { toast('Could not copy. Email: ' + SUPPORT_EMAIL, 'err'); }
+        }
+    };
+    $('btn-send-contact').onclick = () => {
+        const name = $('c-name').value.trim(); const email = $('c-email').value.trim();
+        const subject = $('c-subject').value; const message = $('c-message').value.trim();
+        if (!message) { toast('Write a message first', 'err'); return; }
+        const body = `Name: ${name || '-'}\nEmail: ${email || '-'}\n\n${message}`;
+        window.location.href = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('[SubTrack AI Pro] ' + subject)}&body=${encodeURIComponent(body)}`;
+    };
+
+    /* ---------- Backup: export / import ---------- */
+    $('btn-backup-export').onclick = () => {
+        if (!subs.length) { toast('No subscriptions to back up', 'err'); return; }
+        const payload = { exportedAt: new Date().toISOString(), monthlyBudget: budget, subscriptions: subs.map(({ id, ...rest }) => rest) };
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'subtrack-backup.json';
+        document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+        toast('Backup downloaded');
+    };
+    $('btn-backup-import').addEventListener('change', async (e) => {
+        const file = e.target.files[0]; e.target.value = '';
+        if (!file) return;
+        try {
+            const parsed = JSON.parse(await file.text());
+            const items = Array.isArray(parsed) ? parsed : Array.isArray(parsed.subscriptions) ? parsed.subscriptions : null;
+            if (!items || !items.length) { toast('That file has no subscriptions to import', 'err'); return; }
+            if (!confirm(`Import ${items.length} subscription${items.length === 1 ? '' : 's'}? This adds to your current list — it won't overwrite anything.`)) return;
+            let count = 0;
+            for (const raw of items) {
+                if (!raw || !raw.name || !raw.price || !raw.nextDate) continue;
+                const clean = { name: String(raw.name), price: Number(raw.price) || 0, cycle: raw.cycle === 'yearly' ? 'yearly' : 'monthly', category: CATS[raw.category] ? raw.category : 'Other', nextDate: String(raw.nextDate), status: raw.status === 'cancelled' ? 'cancelled' : 'active', isTrial: !!raw.isTrial, splitCount: Math.max(1, Math.round(Number(raw.splitCount) || 1)), createdAt: Date.now() };
+                await addDoc(collection(db, 'users', user.uid, 'subscriptions'), clean);
+                count++;
+            }
+            toast(`Imported ${count} subscription${count === 1 ? '' : 's'}`);
+        } catch (err) { toast('Could not read that file — is it a SubTrack backup JSON?', 'err'); }
+    });
+
+    /* ---------- Voice AI: real browser speech recognition (Web Speech API), fixed command set ----------
+       This is genuine speech-to-text via the browser, not a scripted demo — but it only understands the
+       specific phrases listed in VOICE_HELP below, not open-ended requests. Chrome and Edge support it;
+       Firefox and most other browsers don't, so the mic button stays hidden there. */
+    const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const VOICE_HELP = ['add [name] [price] rupees monthly/yearly', 'set budget to [amount]', 'show active / show cancelled / show all', 'search for [text]', 'go to overview / subscriptions / premium / account', 'export backup'];
+    let recognizer = null, listening = false;
+    if (SpeechRecognitionAPI) {
+        show($('btn-voice'), true);
+        recognizer = new SpeechRecognitionAPI();
+        recognizer.lang = 'en-IN';
+        recognizer.interimResults = false;
+        recognizer.maxAlternatives = 1;
+        recognizer.onresult = (e) => runVoiceCommand(e.results[0][0].transcript);
+        recognizer.onerror = () => setListening(false);
+        recognizer.onend = () => setListening(false);
+    }
+    function setListening(on) {
+        listening = on;
+        $('btn-voice').classList.toggle('listening', on);
+    }
+    $('btn-voice').onclick = () => {
+        if (!recognizer) return;
+        if (listening) { recognizer.stop(); return; }
+        setListening(true);
+        try { recognizer.start(); } catch (e) { setListening(false); }
+    };
+    function runVoiceCommand(text) {
+        const t = text.trim().toLowerCase();
+        toast(`🎙️ "${text.trim()}"`);
+        let m;
+        if ((m = t.match(/^add (.+?) (\d+(?:\.\d+)?) rupees(?: (monthly|yearly))?$/))) {
+            openModal();
+            $('sub-name').value = m[1].replace(/\b\w/g, c => c.toUpperCase());
+            $('sub-price').value = m[2];
+            $('sub-currency').value = 'INR';
+            $('sub-cycle').value = m[3] === 'yearly' ? 'yearly' : 'monthly';
+            updateAltTip(); updateSplitHint();
+            if (!categoryTouched) { const g = guessCategory($('sub-name').value); if (g) $('sub-category').value = g; }
+            toast('Review the details and tap Save subscription');
+        } else if ((m = t.match(/^set budget to (\d+(?:\.\d+)?)$/))) {
+            $('budget-input').value = m[1];
+            $('btn-save-budget').click();
+        } else if (t.includes('show active')) { filter = 'active'; syncFilterTabs(); renderSubs(); setView('subs'); }
+        else if (t.includes('show cancelled') || t.includes('show canceled')) { filter = 'cancelled'; syncFilterTabs(); renderSubs(); setView('subs'); }
+        else if (t.includes('show all')) { filter = 'all'; syncFilterTabs(); renderSubs(); setView('subs'); }
+        else if ((m = t.match(/^search (?:for )?(.+)$/))) { search = m[1]; $('search-input').value = m[1]; renderSubs(); setView('subs'); }
+        else if (t.includes('go to overview')) setView('overview');
+        else if (t.includes('go to subscription')) setView('subs');
+        else if (t.includes('go to premium') || t.includes('go to level up')) setView('premium');
+        else if (t.includes('go to account')) setView('account');
+        else if (t.includes('export backup')) $('btn-backup-export').click();
+        else toast(`Didn't catch a command. Try: "${VOICE_HELP[Math.floor(Math.random() * VOICE_HELP.length)]}"`, 'err');
+    }
+
+    $('footer-year').textContent = new Date().getFullYear();
+    applyLaunchState();
+
+    /* ---------- PWA install prompt ---------- */
+    let deferredInstall = null;
+    window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredInstall = e; });
+    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(() => {}); }
+
+    setAuthMode('login');
+</script>
+</body>
+</html>
